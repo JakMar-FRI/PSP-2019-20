@@ -1,0 +1,1656 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Platform based programming, 2020</title>
+        <style>
+/* From extension goessner.mdmath */
+@font-face{font-family:KaTeX_AMS;src:url(fonts/KaTeX_AMS-Regular.woff2) format("woff2"),url(fonts/KaTeX_AMS-Regular.woff) format("woff"),url(fonts/KaTeX_AMS-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Caligraphic;src:url(fonts/KaTeX_Caligraphic-Bold.woff2) format("woff2"),url(fonts/KaTeX_Caligraphic-Bold.woff) format("woff"),url(fonts/KaTeX_Caligraphic-Bold.ttf) format("truetype");font-weight:700;font-style:normal}@font-face{font-family:KaTeX_Caligraphic;src:url(fonts/KaTeX_Caligraphic-Regular.woff2) format("woff2"),url(fonts/KaTeX_Caligraphic-Regular.woff) format("woff"),url(fonts/KaTeX_Caligraphic-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Fraktur;src:url(fonts/KaTeX_Fraktur-Bold.woff2) format("woff2"),url(fonts/KaTeX_Fraktur-Bold.woff) format("woff"),url(fonts/KaTeX_Fraktur-Bold.ttf) format("truetype");font-weight:700;font-style:normal}@font-face{font-family:KaTeX_Fraktur;src:url(fonts/KaTeX_Fraktur-Regular.woff2) format("woff2"),url(fonts/KaTeX_Fraktur-Regular.woff) format("woff"),url(fonts/KaTeX_Fraktur-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Main;src:url(fonts/KaTeX_Main-Bold.woff2) format("woff2"),url(fonts/KaTeX_Main-Bold.woff) format("woff"),url(fonts/KaTeX_Main-Bold.ttf) format("truetype");font-weight:700;font-style:normal}@font-face{font-family:KaTeX_Main;src:url(fonts/KaTeX_Main-BoldItalic.woff2) format("woff2"),url(fonts/KaTeX_Main-BoldItalic.woff) format("woff"),url(fonts/KaTeX_Main-BoldItalic.ttf) format("truetype");font-weight:700;font-style:italic}@font-face{font-family:KaTeX_Main;src:url(fonts/KaTeX_Main-Italic.woff2) format("woff2"),url(fonts/KaTeX_Main-Italic.woff) format("woff"),url(fonts/KaTeX_Main-Italic.ttf) format("truetype");font-weight:400;font-style:italic}@font-face{font-family:KaTeX_Main;src:url(fonts/KaTeX_Main-Regular.woff2) format("woff2"),url(fonts/KaTeX_Main-Regular.woff) format("woff"),url(fonts/KaTeX_Main-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Math;src:url(fonts/KaTeX_Math-BoldItalic.woff2) format("woff2"),url(fonts/KaTeX_Math-BoldItalic.woff) format("woff"),url(fonts/KaTeX_Math-BoldItalic.ttf) format("truetype");font-weight:700;font-style:italic}@font-face{font-family:KaTeX_Math;src:url(fonts/KaTeX_Math-Italic.woff2) format("woff2"),url(fonts/KaTeX_Math-Italic.woff) format("woff"),url(fonts/KaTeX_Math-Italic.ttf) format("truetype");font-weight:400;font-style:italic}@font-face{font-family:"KaTeX_SansSerif";src:url(fonts/KaTeX_SansSerif-Bold.woff2) format("woff2"),url(fonts/KaTeX_SansSerif-Bold.woff) format("woff"),url(fonts/KaTeX_SansSerif-Bold.ttf) format("truetype");font-weight:700;font-style:normal}@font-face{font-family:"KaTeX_SansSerif";src:url(fonts/KaTeX_SansSerif-Italic.woff2) format("woff2"),url(fonts/KaTeX_SansSerif-Italic.woff) format("woff"),url(fonts/KaTeX_SansSerif-Italic.ttf) format("truetype");font-weight:400;font-style:italic}@font-face{font-family:"KaTeX_SansSerif";src:url(fonts/KaTeX_SansSerif-Regular.woff2) format("woff2"),url(fonts/KaTeX_SansSerif-Regular.woff) format("woff"),url(fonts/KaTeX_SansSerif-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Script;src:url(fonts/KaTeX_Script-Regular.woff2) format("woff2"),url(fonts/KaTeX_Script-Regular.woff) format("woff"),url(fonts/KaTeX_Script-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Size1;src:url(fonts/KaTeX_Size1-Regular.woff2) format("woff2"),url(fonts/KaTeX_Size1-Regular.woff) format("woff"),url(fonts/KaTeX_Size1-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Size2;src:url(fonts/KaTeX_Size2-Regular.woff2) format("woff2"),url(fonts/KaTeX_Size2-Regular.woff) format("woff"),url(fonts/KaTeX_Size2-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Size3;src:url(fonts/KaTeX_Size3-Regular.woff2) format("woff2"),url(fonts/KaTeX_Size3-Regular.woff) format("woff"),url(fonts/KaTeX_Size3-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Size4;src:url(fonts/KaTeX_Size4-Regular.woff2) format("woff2"),url(fonts/KaTeX_Size4-Regular.woff) format("woff"),url(fonts/KaTeX_Size4-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Typewriter;src:url(fonts/KaTeX_Typewriter-Regular.woff2) format("woff2"),url(fonts/KaTeX_Typewriter-Regular.woff) format("woff"),url(fonts/KaTeX_Typewriter-Regular.ttf) format("truetype");font-weight:400;font-style:normal}.katex{font:normal 1.21em KaTeX_Main,Times New Roman,serif;line-height:1.2;text-indent:0;text-rendering:auto}.katex *{-ms-high-contrast-adjust:none!important}.katex .katex-version:after{content:"0.10.2"}.katex .katex-mathml{position:absolute;clip:rect(1px,1px,1px,1px);padding:0;border:0;height:1px;width:1px;overflow:hidden}.katex .katex-html>.newline{display:block}.katex .base{position:relative;white-space:nowrap;width:min-content}.katex .base,.katex .strut{display:inline-block}.katex .textbf{font-weight:700}.katex .textit{font-style:italic}.katex .textrm{font-family:KaTeX_Main}.katex .textsf{font-family:KaTeX_SansSerif}.katex .texttt{font-family:KaTeX_Typewriter}.katex .mathdefault{font-family:KaTeX_Math;font-style:italic}.katex .mathit{font-family:KaTeX_Main;font-style:italic}.katex .mathrm{font-style:normal}.katex .mathbf{font-family:KaTeX_Main;font-weight:700}.katex .boldsymbol{font-family:KaTeX_Math;font-weight:700;font-style:italic}.katex .amsrm,.katex .mathbb,.katex .textbb{font-family:KaTeX_AMS}.katex .mathcal{font-family:KaTeX_Caligraphic}.katex .mathfrak,.katex .textfrak{font-family:KaTeX_Fraktur}.katex .mathtt{font-family:KaTeX_Typewriter}.katex .mathscr,.katex .textscr{font-family:KaTeX_Script}.katex .mathsf,.katex .textsf{font-family:KaTeX_SansSerif}.katex .mathboldsf,.katex .textboldsf{font-family:KaTeX_SansSerif;font-weight:700}.katex .mathitsf,.katex .textitsf{font-family:KaTeX_SansSerif;font-style:italic}.katex .mainrm{font-family:KaTeX_Main;font-style:normal}.katex .vlist-t{display:inline-table;table-layout:fixed}.katex .vlist-r{display:table-row}.katex .vlist{display:table-cell;vertical-align:bottom;position:relative}.katex .vlist>span{display:block;height:0;position:relative}.katex .vlist>span>span{display:inline-block}.katex .vlist>span>.pstrut{overflow:hidden;width:0}.katex .vlist-t2{margin-right:-2px}.katex .vlist-s{display:table-cell;vertical-align:bottom;font-size:1px;width:2px;min-width:2px}.katex .msupsub{text-align:left}.katex .mfrac>span>span{text-align:center}.katex .mfrac .frac-line{display:inline-block;width:100%;border-bottom-style:solid}.katex .hdashline,.katex .hline,.katex .mfrac .frac-line,.katex .overline .overline-line,.katex .rule,.katex .underline .underline-line{min-height:1px}.katex .mspace{display:inline-block}.katex .clap,.katex .llap,.katex .rlap{width:0;position:relative}.katex .clap>.inner,.katex .llap>.inner,.katex .rlap>.inner{position:absolute}.katex .clap>.fix,.katex .llap>.fix,.katex .rlap>.fix{display:inline-block}.katex .llap>.inner{right:0}.katex .clap>.inner,.katex .rlap>.inner{left:0}.katex .clap>.inner>span{margin-left:-50%;margin-right:50%}.katex .rule{display:inline-block;border:0 solid;position:relative}.katex .hline,.katex .overline .overline-line,.katex .underline .underline-line{display:inline-block;width:100%;border-bottom-style:solid}.katex .hdashline{display:inline-block;width:100%;border-bottom-style:dashed}.katex .sqrt>.root{margin-left:.27777778em;margin-right:-.55555556em}.katex .fontsize-ensurer,.katex .sizing{display:inline-block}.katex .fontsize-ensurer.reset-size1.size1,.katex .sizing.reset-size1.size1{font-size:1em}.katex .fontsize-ensurer.reset-size1.size2,.katex .sizing.reset-size1.size2{font-size:1.2em}.katex .fontsize-ensurer.reset-size1.size3,.katex .sizing.reset-size1.size3{font-size:1.4em}.katex .fontsize-ensurer.reset-size1.size4,.katex .sizing.reset-size1.size4{font-size:1.6em}.katex .fontsize-ensurer.reset-size1.size5,.katex .sizing.reset-size1.size5{font-size:1.8em}.katex .fontsize-ensurer.reset-size1.size6,.katex .sizing.reset-size1.size6{font-size:2em}.katex .fontsize-ensurer.reset-size1.size7,.katex .sizing.reset-size1.size7{font-size:2.4em}.katex .fontsize-ensurer.reset-size1.size8,.katex .sizing.reset-size1.size8{font-size:2.88em}.katex .fontsize-ensurer.reset-size1.size9,.katex .sizing.reset-size1.size9{font-size:3.456em}.katex .fontsize-ensurer.reset-size1.size10,.katex .sizing.reset-size1.size10{font-size:4.148em}.katex .fontsize-ensurer.reset-size1.size11,.katex .sizing.reset-size1.size11{font-size:4.976em}.katex .fontsize-ensurer.reset-size2.size1,.katex .sizing.reset-size2.size1{font-size:.83333333em}.katex .fontsize-ensurer.reset-size2.size2,.katex .sizing.reset-size2.size2{font-size:1em}.katex .fontsize-ensurer.reset-size2.size3,.katex .sizing.reset-size2.size3{font-size:1.16666667em}.katex .fontsize-ensurer.reset-size2.size4,.katex .sizing.reset-size2.size4{font-size:1.33333333em}.katex .fontsize-ensurer.reset-size2.size5,.katex .sizing.reset-size2.size5{font-size:1.5em}.katex .fontsize-ensurer.reset-size2.size6,.katex .sizing.reset-size2.size6{font-size:1.66666667em}.katex .fontsize-ensurer.reset-size2.size7,.katex .sizing.reset-size2.size7{font-size:2em}.katex .fontsize-ensurer.reset-size2.size8,.katex .sizing.reset-size2.size8{font-size:2.4em}.katex .fontsize-ensurer.reset-size2.size9,.katex .sizing.reset-size2.size9{font-size:2.88em}.katex .fontsize-ensurer.reset-size2.size10,.katex .sizing.reset-size2.size10{font-size:3.45666667em}.katex .fontsize-ensurer.reset-size2.size11,.katex .sizing.reset-size2.size11{font-size:4.14666667em}.katex .fontsize-ensurer.reset-size3.size1,.katex .sizing.reset-size3.size1{font-size:.71428571em}.katex .fontsize-ensurer.reset-size3.size2,.katex .sizing.reset-size3.size2{font-size:.85714286em}.katex .fontsize-ensurer.reset-size3.size3,.katex .sizing.reset-size3.size3{font-size:1em}.katex .fontsize-ensurer.reset-size3.size4,.katex .sizing.reset-size3.size4{font-size:1.14285714em}.katex .fontsize-ensurer.reset-size3.size5,.katex .sizing.reset-size3.size5{font-size:1.28571429em}.katex .fontsize-ensurer.reset-size3.size6,.katex .sizing.reset-size3.size6{font-size:1.42857143em}.katex .fontsize-ensurer.reset-size3.size7,.katex .sizing.reset-size3.size7{font-size:1.71428571em}.katex .fontsize-ensurer.reset-size3.size8,.katex .sizing.reset-size3.size8{font-size:2.05714286em}.katex .fontsize-ensurer.reset-size3.size9,.katex .sizing.reset-size3.size9{font-size:2.46857143em}.katex .fontsize-ensurer.reset-size3.size10,.katex .sizing.reset-size3.size10{font-size:2.96285714em}.katex .fontsize-ensurer.reset-size3.size11,.katex .sizing.reset-size3.size11{font-size:3.55428571em}.katex .fontsize-ensurer.reset-size4.size1,.katex .sizing.reset-size4.size1{font-size:.625em}.katex .fontsize-ensurer.reset-size4.size2,.katex .sizing.reset-size4.size2{font-size:.75em}.katex .fontsize-ensurer.reset-size4.size3,.katex .sizing.reset-size4.size3{font-size:.875em}.katex .fontsize-ensurer.reset-size4.size4,.katex .sizing.reset-size4.size4{font-size:1em}.katex .fontsize-ensurer.reset-size4.size5,.katex .sizing.reset-size4.size5{font-size:1.125em}.katex .fontsize-ensurer.reset-size4.size6,.katex .sizing.reset-size4.size6{font-size:1.25em}.katex .fontsize-ensurer.reset-size4.size7,.katex .sizing.reset-size4.size7{font-size:1.5em}.katex .fontsize-ensurer.reset-size4.size8,.katex .sizing.reset-size4.size8{font-size:1.8em}.katex .fontsize-ensurer.reset-size4.size9,.katex .sizing.reset-size4.size9{font-size:2.16em}.katex .fontsize-ensurer.reset-size4.size10,.katex .sizing.reset-size4.size10{font-size:2.5925em}.katex .fontsize-ensurer.reset-size4.size11,.katex .sizing.reset-size4.size11{font-size:3.11em}.katex .fontsize-ensurer.reset-size5.size1,.katex .sizing.reset-size5.size1{font-size:.55555556em}.katex .fontsize-ensurer.reset-size5.size2,.katex .sizing.reset-size5.size2{font-size:.66666667em}.katex .fontsize-ensurer.reset-size5.size3,.katex .sizing.reset-size5.size3{font-size:.77777778em}.katex .fontsize-ensurer.reset-size5.size4,.katex .sizing.reset-size5.size4{font-size:.88888889em}.katex .fontsize-ensurer.reset-size5.size5,.katex .sizing.reset-size5.size5{font-size:1em}.katex .fontsize-ensurer.reset-size5.size6,.katex .sizing.reset-size5.size6{font-size:1.11111111em}.katex .fontsize-ensurer.reset-size5.size7,.katex .sizing.reset-size5.size7{font-size:1.33333333em}.katex .fontsize-ensurer.reset-size5.size8,.katex .sizing.reset-size5.size8{font-size:1.6em}.katex .fontsize-ensurer.reset-size5.size9,.katex .sizing.reset-size5.size9{font-size:1.92em}.katex .fontsize-ensurer.reset-size5.size10,.katex .sizing.reset-size5.size10{font-size:2.30444444em}.katex .fontsize-ensurer.reset-size5.size11,.katex .sizing.reset-size5.size11{font-size:2.76444444em}.katex .fontsize-ensurer.reset-size6.size1,.katex .sizing.reset-size6.size1{font-size:.5em}.katex .fontsize-ensurer.reset-size6.size2,.katex .sizing.reset-size6.size2{font-size:.6em}.katex .fontsize-ensurer.reset-size6.size3,.katex .sizing.reset-size6.size3{font-size:.7em}.katex .fontsize-ensurer.reset-size6.size4,.katex .sizing.reset-size6.size4{font-size:.8em}.katex .fontsize-ensurer.reset-size6.size5,.katex .sizing.reset-size6.size5{font-size:.9em}.katex .fontsize-ensurer.reset-size6.size6,.katex .sizing.reset-size6.size6{font-size:1em}.katex .fontsize-ensurer.reset-size6.size7,.katex .sizing.reset-size6.size7{font-size:1.2em}.katex .fontsize-ensurer.reset-size6.size8,.katex .sizing.reset-size6.size8{font-size:1.44em}.katex .fontsize-ensurer.reset-size6.size9,.katex .sizing.reset-size6.size9{font-size:1.728em}.katex .fontsize-ensurer.reset-size6.size10,.katex .sizing.reset-size6.size10{font-size:2.074em}.katex .fontsize-ensurer.reset-size6.size11,.katex .sizing.reset-size6.size11{font-size:2.488em}.katex .fontsize-ensurer.reset-size7.size1,.katex .sizing.reset-size7.size1{font-size:.41666667em}.katex .fontsize-ensurer.reset-size7.size2,.katex .sizing.reset-size7.size2{font-size:.5em}.katex .fontsize-ensurer.reset-size7.size3,.katex .sizing.reset-size7.size3{font-size:.58333333em}.katex .fontsize-ensurer.reset-size7.size4,.katex .sizing.reset-size7.size4{font-size:.66666667em}.katex .fontsize-ensurer.reset-size7.size5,.katex .sizing.reset-size7.size5{font-size:.75em}.katex .fontsize-ensurer.reset-size7.size6,.katex .sizing.reset-size7.size6{font-size:.83333333em}.katex .fontsize-ensurer.reset-size7.size7,.katex .sizing.reset-size7.size7{font-size:1em}.katex .fontsize-ensurer.reset-size7.size8,.katex .sizing.reset-size7.size8{font-size:1.2em}.katex .fontsize-ensurer.reset-size7.size9,.katex .sizing.reset-size7.size9{font-size:1.44em}.katex .fontsize-ensurer.reset-size7.size10,.katex .sizing.reset-size7.size10{font-size:1.72833333em}.katex .fontsize-ensurer.reset-size7.size11,.katex .sizing.reset-size7.size11{font-size:2.07333333em}.katex .fontsize-ensurer.reset-size8.size1,.katex .sizing.reset-size8.size1{font-size:.34722222em}.katex .fontsize-ensurer.reset-size8.size2,.katex .sizing.reset-size8.size2{font-size:.41666667em}.katex .fontsize-ensurer.reset-size8.size3,.katex .sizing.reset-size8.size3{font-size:.48611111em}.katex .fontsize-ensurer.reset-size8.size4,.katex .sizing.reset-size8.size4{font-size:.55555556em}.katex .fontsize-ensurer.reset-size8.size5,.katex .sizing.reset-size8.size5{font-size:.625em}.katex .fontsize-ensurer.reset-size8.size6,.katex .sizing.reset-size8.size6{font-size:.69444444em}.katex .fontsize-ensurer.reset-size8.size7,.katex .sizing.reset-size8.size7{font-size:.83333333em}.katex .fontsize-ensurer.reset-size8.size8,.katex .sizing.reset-size8.size8{font-size:1em}.katex .fontsize-ensurer.reset-size8.size9,.katex .sizing.reset-size8.size9{font-size:1.2em}.katex .fontsize-ensurer.reset-size8.size10,.katex .sizing.reset-size8.size10{font-size:1.44027778em}.katex .fontsize-ensurer.reset-size8.size11,.katex .sizing.reset-size8.size11{font-size:1.72777778em}.katex .fontsize-ensurer.reset-size9.size1,.katex .sizing.reset-size9.size1{font-size:.28935185em}.katex .fontsize-ensurer.reset-size9.size2,.katex .sizing.reset-size9.size2{font-size:.34722222em}.katex .fontsize-ensurer.reset-size9.size3,.katex .sizing.reset-size9.size3{font-size:.40509259em}.katex .fontsize-ensurer.reset-size9.size4,.katex .sizing.reset-size9.size4{font-size:.46296296em}.katex .fontsize-ensurer.reset-size9.size5,.katex .sizing.reset-size9.size5{font-size:.52083333em}.katex .fontsize-ensurer.reset-size9.size6,.katex .sizing.reset-size9.size6{font-size:.5787037em}.katex .fontsize-ensurer.reset-size9.size7,.katex .sizing.reset-size9.size7{font-size:.69444444em}.katex .fontsize-ensurer.reset-size9.size8,.katex .sizing.reset-size9.size8{font-size:.83333333em}.katex .fontsize-ensurer.reset-size9.size9,.katex .sizing.reset-size9.size9{font-size:1em}.katex .fontsize-ensurer.reset-size9.size10,.katex .sizing.reset-size9.size10{font-size:1.20023148em}.katex .fontsize-ensurer.reset-size9.size11,.katex .sizing.reset-size9.size11{font-size:1.43981481em}.katex .fontsize-ensurer.reset-size10.size1,.katex .sizing.reset-size10.size1{font-size:.24108004em}.katex .fontsize-ensurer.reset-size10.size2,.katex .sizing.reset-size10.size2{font-size:.28929605em}.katex .fontsize-ensurer.reset-size10.size3,.katex .sizing.reset-size10.size3{font-size:.33751205em}.katex .fontsize-ensurer.reset-size10.size4,.katex .sizing.reset-size10.size4{font-size:.38572806em}.katex .fontsize-ensurer.reset-size10.size5,.katex .sizing.reset-size10.size5{font-size:.43394407em}.katex .fontsize-ensurer.reset-size10.size6,.katex .sizing.reset-size10.size6{font-size:.48216008em}.katex .fontsize-ensurer.reset-size10.size7,.katex .sizing.reset-size10.size7{font-size:.57859209em}.katex .fontsize-ensurer.reset-size10.size8,.katex .sizing.reset-size10.size8{font-size:.69431051em}.katex .fontsize-ensurer.reset-size10.size9,.katex .sizing.reset-size10.size9{font-size:.83317261em}.katex .fontsize-ensurer.reset-size10.size10,.katex .sizing.reset-size10.size10{font-size:1em}.katex .fontsize-ensurer.reset-size10.size11,.katex .sizing.reset-size10.size11{font-size:1.19961427em}.katex .fontsize-ensurer.reset-size11.size1,.katex .sizing.reset-size11.size1{font-size:.20096463em}.katex .fontsize-ensurer.reset-size11.size2,.katex .sizing.reset-size11.size2{font-size:.24115756em}.katex .fontsize-ensurer.reset-size11.size3,.katex .sizing.reset-size11.size3{font-size:.28135048em}.katex .fontsize-ensurer.reset-size11.size4,.katex .sizing.reset-size11.size4{font-size:.32154341em}.katex .fontsize-ensurer.reset-size11.size5,.katex .sizing.reset-size11.size5{font-size:.36173633em}.katex .fontsize-ensurer.reset-size11.size6,.katex .sizing.reset-size11.size6{font-size:.40192926em}.katex .fontsize-ensurer.reset-size11.size7,.katex .sizing.reset-size11.size7{font-size:.48231511em}.katex .fontsize-ensurer.reset-size11.size8,.katex .sizing.reset-size11.size8{font-size:.57877814em}.katex .fontsize-ensurer.reset-size11.size9,.katex .sizing.reset-size11.size9{font-size:.69453376em}.katex .fontsize-ensurer.reset-size11.size10,.katex .sizing.reset-size11.size10{font-size:.83360129em}.katex .fontsize-ensurer.reset-size11.size11,.katex .sizing.reset-size11.size11{font-size:1em}.katex .delimsizing.size1{font-family:KaTeX_Size1}.katex .delimsizing.size2{font-family:KaTeX_Size2}.katex .delimsizing.size3{font-family:KaTeX_Size3}.katex .delimsizing.size4{font-family:KaTeX_Size4}.katex .delimsizing.mult .delim-size1>span{font-family:KaTeX_Size1}.katex .delimsizing.mult .delim-size4>span{font-family:KaTeX_Size4}.katex .nulldelimiter{display:inline-block;width:.12em}.katex .delimcenter,.katex .op-symbol{position:relative}.katex .op-symbol.small-op{font-family:KaTeX_Size1}.katex .op-symbol.large-op{font-family:KaTeX_Size2}.katex .op-limits>.vlist-t{text-align:center}.katex .accent>.vlist-t{text-align:center}.katex .accent .accent-body{position:relative}.katex .accent .accent-body:not(.accent-full){width:0}.katex .overlay{display:block}.katex .mtable .vertical-separator{display:inline-block;margin:0 -.025em;border-right:.05em solid;min-width:1px}.katex .mtable .vs-dashed{border-right:.05em dashed}.katex .mtable .arraycolsep{display:inline-block}.katex .mtable .col-align-c>.vlist-t{text-align:center}.katex .mtable .col-align-l>.vlist-t{text-align:left}.katex .mtable .col-align-r>.vlist-t{text-align:right}.katex .svg-align{text-align:left}.katex svg{display:block;position:absolute;width:100%;height:inherit;fill:currentColor;stroke:currentColor;fill-rule:nonzero;fill-opacity:1;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1}.katex svg path{stroke:none}.katex img{border-style:none;min-width:0;min-height:0;max-width:none;max-height:none}.katex .stretchy{width:100%;display:block;position:relative;overflow:hidden}.katex .stretchy:after,.katex .stretchy:before{content:""}.katex .hide-tail{width:100%;position:relative;overflow:hidden}.katex .halfarrow-left{position:absolute;left:0;width:50.2%;overflow:hidden}.katex .halfarrow-right{position:absolute;right:0;width:50.2%;overflow:hidden}.katex .brace-left{position:absolute;left:0;width:25.1%;overflow:hidden}.katex .brace-center{position:absolute;left:25%;width:50%;overflow:hidden}.katex .brace-right{position:absolute;right:0;width:25.1%;overflow:hidden}.katex .x-arrow-pad{padding:0 .5em}.katex .mover,.katex .munder,.katex .x-arrow{text-align:center}.katex .boxpad{padding:0 .3em}.katex .fbox,.katex .fcolorbox{box-sizing:border-box;border:.04em solid}.katex .cancel-pad{padding:0 .2em}.katex .cancel-lap{margin-left:-.2em;margin-right:-.2em}.katex .sout{border-bottom-style:solid;border-bottom-width:.08em}.katex-display{display:block;margin:1em 0;text-align:center}.katex-display>.katex{display:block;text-align:center;white-space:nowrap}.katex-display>.katex>.katex-html{display:block;position:relative}.katex-display>.katex>.katex-html>.tag{position:absolute;right:0}.katex-display.leqno>.katex>.katex-html>.tag{left:0;right:auto}.katex-display.fleqn>.katex{text-align:left}
+
+/* style for html inside of browsers */
+/* align KaTeX font-size to surrounding text */
+.katex { font-size: 1em !important; }
+/* supress effect of display formulas with eqno having bigger margin */
+.katex-display { margin:0 !important; }
+/* overwrite github-markdown.css asymmetric margin values */
+.markdown-body blockquote, .markdown-body dl, .markdown-body ol, .markdown-body p, .markdown-body pre, .markdown-body table, .markdown-body ul {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+eq { display: inline-block; }
+eqn { display: block; margin: 0; }
+section.eqno {
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+    align-items: center;
+    
+}
+section.eqno > eqn {
+    width: 100%;
+    margin-left: 3em;
+}
+section.eqno > span {
+    width:3em;
+    text-align:right;
+}
+
+p { text-align: justify; }
+
+table {
+    display: table !important;
+    width: auto !important;
+    margin-left: auto !important;
+    margin-right: auto !important; 
+    border-collapse: collapse !important;
+}
+
+table th, table td {
+    border-left: none !important;
+    border-right: none !important;
+    border-top: 1px solid #000 !important;
+    border-bottom: 1px solid #000 !important;
+}
+
+figure {
+    margin: 0.5em auto;
+}
+figure > img {
+    display: block;
+    margin: 0 auto;
+    page-break-inside: avoid;
+}
+figcaption { 
+    display: block;
+    text-align: center;
+    margin-top: 0.5em;
+}
+
+/* From extension koehlma.markdown-math */
+@font-face{font-family:KaTeX_AMS;src:url(fonts/KaTeX_AMS-Regular.eot);src:url(fonts/KaTeX_AMS-Regular.eot#iefix) format('embedded-opentype'),url(fonts/KaTeX_AMS-Regular.woff2) format('woff2'),url(fonts/KaTeX_AMS-Regular.woff) format('woff'),url(fonts/KaTeX_AMS-Regular.ttf) format('ttf');font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Caligraphic;src:url(fonts/KaTeX_Caligraphic-Bold.eot);src:url(fonts/KaTeX_Caligraphic-Bold.eot#iefix) format('embedded-opentype'),url(fonts/KaTeX_Caligraphic-Bold.woff2) format('woff2'),url(fonts/KaTeX_Caligraphic-Bold.woff) format('woff'),url(fonts/KaTeX_Caligraphic-Bold.ttf) format('ttf');font-weight:700;font-style:normal}@font-face{font-family:KaTeX_Caligraphic;src:url(fonts/KaTeX_Caligraphic-Regular.eot);src:url(fonts/KaTeX_Caligraphic-Regular.eot#iefix) format('embedded-opentype'),url(fonts/KaTeX_Caligraphic-Regular.woff2) format('woff2'),url(fonts/KaTeX_Caligraphic-Regular.woff) format('woff'),url(fonts/KaTeX_Caligraphic-Regular.ttf) format('ttf');font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Fraktur;src:url(fonts/KaTeX_Fraktur-Bold.eot);src:url(fonts/KaTeX_Fraktur-Bold.eot#iefix) format('embedded-opentype'),url(fonts/KaTeX_Fraktur-Bold.woff2) format('woff2'),url(fonts/KaTeX_Fraktur-Bold.woff) format('woff'),url(fonts/KaTeX_Fraktur-Bold.ttf) format('ttf');font-weight:700;font-style:normal}@font-face{font-family:KaTeX_Fraktur;src:url(fonts/KaTeX_Fraktur-Regular.eot);src:url(fonts/KaTeX_Fraktur-Regular.eot#iefix) format('embedded-opentype'),url(fonts/KaTeX_Fraktur-Regular.woff2) format('woff2'),url(fonts/KaTeX_Fraktur-Regular.woff) format('woff'),url(fonts/KaTeX_Fraktur-Regular.ttf) format('ttf');font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Main;src:url(fonts/KaTeX_Main-Bold.eot);src:url(fonts/KaTeX_Main-Bold.eot#iefix) format('embedded-opentype'),url(fonts/KaTeX_Main-Bold.woff2) format('woff2'),url(fonts/KaTeX_Main-Bold.woff) format('woff'),url(fonts/KaTeX_Main-Bold.ttf) format('ttf');font-weight:700;font-style:normal}@font-face{font-family:KaTeX_Main;src:url(fonts/KaTeX_Main-Italic.eot);src:url(fonts/KaTeX_Main-Italic.eot#iefix) format('embedded-opentype'),url(fonts/KaTeX_Main-Italic.woff2) format('woff2'),url(fonts/KaTeX_Main-Italic.woff) format('woff'),url(fonts/KaTeX_Main-Italic.ttf) format('ttf');font-weight:400;font-style:italic}@font-face{font-family:KaTeX_Main;src:url(fonts/KaTeX_Main-Regular.eot);src:url(fonts/KaTeX_Main-Regular.eot#iefix) format('embedded-opentype'),url(fonts/KaTeX_Main-Regular.woff2) format('woff2'),url(fonts/KaTeX_Main-Regular.woff) format('woff'),url(fonts/KaTeX_Main-Regular.ttf) format('ttf');font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Math;src:url(fonts/KaTeX_Math-Italic.eot);src:url(fonts/KaTeX_Math-Italic.eot#iefix) format('embedded-opentype'),url(fonts/KaTeX_Math-Italic.woff2) format('woff2'),url(fonts/KaTeX_Math-Italic.woff) format('woff'),url(fonts/KaTeX_Math-Italic.ttf) format('ttf');font-weight:400;font-style:italic}@font-face{font-family:KaTeX_SansSerif;src:url(fonts/KaTeX_SansSerif-Regular.eot);src:url(fonts/KaTeX_SansSerif-Regular.eot#iefix) format('embedded-opentype'),url(fonts/KaTeX_SansSerif-Regular.woff2) format('woff2'),url(fonts/KaTeX_SansSerif-Regular.woff) format('woff'),url(fonts/KaTeX_SansSerif-Regular.ttf) format('ttf');font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Script;src:url(fonts/KaTeX_Script-Regular.eot);src:url(fonts/KaTeX_Script-Regular.eot#iefix) format('embedded-opentype'),url(fonts/KaTeX_Script-Regular.woff2) format('woff2'),url(fonts/KaTeX_Script-Regular.woff) format('woff'),url(fonts/KaTeX_Script-Regular.ttf) format('ttf');font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Size1;src:url(fonts/KaTeX_Size1-Regular.eot);src:url(fonts/KaTeX_Size1-Regular.eot#iefix) format('embedded-opentype'),url(fonts/KaTeX_Size1-Regular.woff2) format('woff2'),url(fonts/KaTeX_Size1-Regular.woff) format('woff'),url(fonts/KaTeX_Size1-Regular.ttf) format('ttf');font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Size2;src:url(fonts/KaTeX_Size2-Regular.eot);src:url(fonts/KaTeX_Size2-Regular.eot#iefix) format('embedded-opentype'),url(fonts/KaTeX_Size2-Regular.woff2) format('woff2'),url(fonts/KaTeX_Size2-Regular.woff) format('woff'),url(fonts/KaTeX_Size2-Regular.ttf) format('ttf');font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Size3;src:url(fonts/KaTeX_Size3-Regular.eot);src:url(fonts/KaTeX_Size3-Regular.eot#iefix) format('embedded-opentype'),url(fonts/KaTeX_Size3-Regular.woff2) format('woff2'),url(fonts/KaTeX_Size3-Regular.woff) format('woff'),url(fonts/KaTeX_Size3-Regular.ttf) format('ttf');font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Size4;src:url(fonts/KaTeX_Size4-Regular.eot);src:url(fonts/KaTeX_Size4-Regular.eot#iefix) format('embedded-opentype'),url(fonts/KaTeX_Size4-Regular.woff2) format('woff2'),url(fonts/KaTeX_Size4-Regular.woff) format('woff'),url(fonts/KaTeX_Size4-Regular.ttf) format('ttf');font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Typewriter;src:url(fonts/KaTeX_Typewriter-Regular.eot);src:url(fonts/KaTeX_Typewriter-Regular.eot#iefix) format('embedded-opentype'),url(fonts/KaTeX_Typewriter-Regular.woff2) format('woff2'),url(fonts/KaTeX_Typewriter-Regular.woff) format('woff'),url(fonts/KaTeX_Typewriter-Regular.ttf) format('ttf');font-weight:400;font-style:normal}.katex-display{display:block;margin:1em 0;text-align:center}.katex-display>.katex{display:inline-block;text-align:initial}.katex{font:400 1.21em KaTeX_Main;line-height:1.2;white-space:nowrap;text-indent:0}.katex .katex-html{display:inline-block}.katex .katex-mathml{position:absolute;clip:rect(1px,1px,1px,1px);padding:0;border:0;height:1px;width:1px;overflow:hidden}.katex .base,.katex .strut{display:inline-block}.katex .mathit{font-family:KaTeX_Math;font-style:italic}.katex .mathbf{font-family:KaTeX_Main;font-weight:700}.katex .amsrm,.katex .mathbb{font-family:KaTeX_AMS}.katex .mathcal{font-family:KaTeX_Caligraphic}.katex .mathfrak{font-family:KaTeX_Fraktur}.katex .mathtt{font-family:KaTeX_Typewriter}.katex .mathscr{font-family:KaTeX_Script}.katex .mathsf{font-family:KaTeX_SansSerif}.katex .mainit{font-family:KaTeX_Main;font-style:italic}.katex .textstyle>.mord+.mop{margin-left:.16667em}.katex .textstyle>.mord+.mbin{margin-left:.22222em}.katex .textstyle>.mord+.mrel{margin-left:.27778em}.katex .textstyle>.mop+.mop,.katex .textstyle>.mop+.mord,.katex .textstyle>.mord+.minner{margin-left:.16667em}.katex .textstyle>.mop+.mrel{margin-left:.27778em}.katex .textstyle>.mop+.minner{margin-left:.16667em}.katex .textstyle>.mbin+.minner,.katex .textstyle>.mbin+.mop,.katex .textstyle>.mbin+.mopen,.katex .textstyle>.mbin+.mord{margin-left:.22222em}.katex .textstyle>.mrel+.minner,.katex .textstyle>.mrel+.mop,.katex .textstyle>.mrel+.mopen,.katex .textstyle>.mrel+.mord{margin-left:.27778em}.katex .textstyle>.mclose+.mop{margin-left:.16667em}.katex .textstyle>.mclose+.mbin{margin-left:.22222em}.katex .textstyle>.mclose+.mrel{margin-left:.27778em}.katex .textstyle>.mclose+.minner,.katex .textstyle>.minner+.mop,.katex .textstyle>.minner+.mord,.katex .textstyle>.mpunct+.mclose,.katex .textstyle>.mpunct+.minner,.katex .textstyle>.mpunct+.mop,.katex .textstyle>.mpunct+.mopen,.katex .textstyle>.mpunct+.mord,.katex .textstyle>.mpunct+.mpunct,.katex .textstyle>.mpunct+.mrel{margin-left:.16667em}.katex .textstyle>.minner+.mbin{margin-left:.22222em}.katex .textstyle>.minner+.mrel{margin-left:.27778em}.katex .mclose+.mop,.katex .minner+.mop,.katex .mop+.mop,.katex .mop+.mord,.katex .mord+.mop,.katex .textstyle>.minner+.minner,.katex .textstyle>.minner+.mopen,.katex .textstyle>.minner+.mpunct{margin-left:.16667em}.katex .reset-textstyle.textstyle{font-size:1em}.katex .reset-textstyle.scriptstyle{font-size:.7em}.katex .reset-textstyle.scriptscriptstyle{font-size:.5em}.katex .reset-scriptstyle.textstyle{font-size:1.42857em}.katex .reset-scriptstyle.scriptstyle{font-size:1em}.katex .reset-scriptstyle.scriptscriptstyle{font-size:.71429em}.katex .reset-scriptscriptstyle.textstyle{font-size:2em}.katex .reset-scriptscriptstyle.scriptstyle{font-size:1.4em}.katex .reset-scriptscriptstyle.scriptscriptstyle{font-size:1em}.katex .style-wrap{position:relative}.katex .vlist{display:inline-block}.katex .vlist>span{display:block;height:0;position:relative}.katex .vlist>span>span{display:inline-block}.katex .vlist .baseline-fix{display:inline-table;table-layout:fixed}.katex .msupsub{text-align:left}.katex .mfrac>span>span{text-align:center}.katex .mfrac .frac-line{width:100%}.katex .mfrac .frac-line:before{border-bottom-style:solid;border-bottom-width:1px;content:"";display:block}.katex .mfrac .frac-line:after{border-bottom-style:solid;border-bottom-width:.04em;content:"";display:block;margin-top:-1px}.katex .mspace{display:inline-block}.katex .mspace.negativethinspace{margin-left:-.16667em}.katex .mspace.thinspace{width:.16667em}.katex .mspace.mediumspace{width:.22222em}.katex .mspace.thickspace{width:.27778em}.katex .mspace.enspace{width:.5em}.katex .mspace.quad{width:1em}.katex .mspace.qquad{width:2em}.katex .llap,.katex .rlap{width:0;position:relative}.katex .llap>.inner,.katex .rlap>.inner{position:absolute}.katex .llap>.fix,.katex .rlap>.fix{display:inline-block}.katex .llap>.inner{right:0}.katex .rlap>.inner{left:0}.katex .katex-logo .a{font-size:.75em;margin-left:-.32em;position:relative;top:-.2em}.katex .katex-logo .t{margin-left:-.23em}.katex .katex-logo .e{margin-left:-.1667em;position:relative;top:.2155em}.katex .katex-logo .x{margin-left:-.125em}.katex .rule{display:inline-block;border:0 solid;position:relative}.katex .overline .overline-line,.katex .underline .underline-line{width:100%}.katex .overline .overline-line:before,.katex .underline .underline-line:before{border-bottom-style:solid;border-bottom-width:1px;content:"";display:block}.katex .overline .overline-line:after,.katex .underline .underline-line:after{border-bottom-style:solid;border-bottom-width:.04em;content:"";display:block;margin-top:-1px}.katex .sqrt>.sqrt-sign{position:relative}.katex .sqrt .sqrt-line{width:100%}.katex .sqrt .sqrt-line:before{border-bottom-style:solid;border-bottom-width:1px;content:"";display:block}.katex .sqrt .sqrt-line:after{border-bottom-style:solid;border-bottom-width:.04em;content:"";display:block;margin-top:-1px}.katex .sqrt>.root{margin-left:.27777778em;margin-right:-.55555556em}.katex .fontsize-ensurer,.katex .sizing{display:inline-block}.katex .fontsize-ensurer.reset-size1.size1,.katex .sizing.reset-size1.size1{font-size:1em}.katex .fontsize-ensurer.reset-size1.size2,.katex .sizing.reset-size1.size2{font-size:1.4em}.katex .fontsize-ensurer.reset-size1.size3,.katex .sizing.reset-size1.size3{font-size:1.6em}.katex .fontsize-ensurer.reset-size1.size4,.katex .sizing.reset-size1.size4{font-size:1.8em}.katex .fontsize-ensurer.reset-size1.size5,.katex .sizing.reset-size1.size5{font-size:2em}.katex .fontsize-ensurer.reset-size1.size6,.katex .sizing.reset-size1.size6{font-size:2.4em}.katex .fontsize-ensurer.reset-size1.size7,.katex .sizing.reset-size1.size7{font-size:2.88em}.katex .fontsize-ensurer.reset-size1.size8,.katex .sizing.reset-size1.size8{font-size:3.46em}.katex .fontsize-ensurer.reset-size1.size9,.katex .sizing.reset-size1.size9{font-size:4.14em}.katex .fontsize-ensurer.reset-size1.size10,.katex .sizing.reset-size1.size10{font-size:4.98em}.katex .fontsize-ensurer.reset-size2.size1,.katex .sizing.reset-size2.size1{font-size:.71428571em}.katex .fontsize-ensurer.reset-size2.size2,.katex .sizing.reset-size2.size2{font-size:1em}.katex .fontsize-ensurer.reset-size2.size3,.katex .sizing.reset-size2.size3{font-size:1.14285714em}.katex .fontsize-ensurer.reset-size2.size4,.katex .sizing.reset-size2.size4{font-size:1.28571429em}.katex .fontsize-ensurer.reset-size2.size5,.katex .sizing.reset-size2.size5{font-size:1.42857143em}.katex .fontsize-ensurer.reset-size2.size6,.katex .sizing.reset-size2.size6{font-size:1.71428571em}.katex .fontsize-ensurer.reset-size2.size7,.katex .sizing.reset-size2.size7{font-size:2.05714286em}.katex .fontsize-ensurer.reset-size2.size8,.katex .sizing.reset-size2.size8{font-size:2.47142857em}.katex .fontsize-ensurer.reset-size2.size9,.katex .sizing.reset-size2.size9{font-size:2.95714286em}.katex .fontsize-ensurer.reset-size2.size10,.katex .sizing.reset-size2.size10{font-size:3.55714286em}.katex .fontsize-ensurer.reset-size3.size1,.katex .sizing.reset-size3.size1{font-size:.625em}.katex .fontsize-ensurer.reset-size3.size2,.katex .sizing.reset-size3.size2{font-size:.875em}.katex .fontsize-ensurer.reset-size3.size3,.katex .sizing.reset-size3.size3{font-size:1em}.katex .fontsize-ensurer.reset-size3.size4,.katex .sizing.reset-size3.size4{font-size:1.125em}.katex .fontsize-ensurer.reset-size3.size5,.katex .sizing.reset-size3.size5{font-size:1.25em}.katex .fontsize-ensurer.reset-size3.size6,.katex .sizing.reset-size3.size6{font-size:1.5em}.katex .fontsize-ensurer.reset-size3.size7,.katex .sizing.reset-size3.size7{font-size:1.8em}.katex .fontsize-ensurer.reset-size3.size8,.katex .sizing.reset-size3.size8{font-size:2.1625em}.katex .fontsize-ensurer.reset-size3.size9,.katex .sizing.reset-size3.size9{font-size:2.5875em}.katex .fontsize-ensurer.reset-size3.size10,.katex .sizing.reset-size3.size10{font-size:3.1125em}.katex .fontsize-ensurer.reset-size4.size1,.katex .sizing.reset-size4.size1{font-size:.55555556em}.katex .fontsize-ensurer.reset-size4.size2,.katex .sizing.reset-size4.size2{font-size:.77777778em}.katex .fontsize-ensurer.reset-size4.size3,.katex .sizing.reset-size4.size3{font-size:.88888889em}.katex .fontsize-ensurer.reset-size4.size4,.katex .sizing.reset-size4.size4{font-size:1em}.katex .fontsize-ensurer.reset-size4.size5,.katex .sizing.reset-size4.size5{font-size:1.11111111em}.katex .fontsize-ensurer.reset-size4.size6,.katex .sizing.reset-size4.size6{font-size:1.33333333em}.katex .fontsize-ensurer.reset-size4.size7,.katex .sizing.reset-size4.size7{font-size:1.6em}.katex .fontsize-ensurer.reset-size4.size8,.katex .sizing.reset-size4.size8{font-size:1.92222222em}.katex .fontsize-ensurer.reset-size4.size9,.katex .sizing.reset-size4.size9{font-size:2.3em}.katex .fontsize-ensurer.reset-size4.size10,.katex .sizing.reset-size4.size10{font-size:2.76666667em}.katex .fontsize-ensurer.reset-size5.size1,.katex .sizing.reset-size5.size1{font-size:.5em}.katex .fontsize-ensurer.reset-size5.size2,.katex .sizing.reset-size5.size2{font-size:.7em}.katex .fontsize-ensurer.reset-size5.size3,.katex .sizing.reset-size5.size3{font-size:.8em}.katex .fontsize-ensurer.reset-size5.size4,.katex .sizing.reset-size5.size4{font-size:.9em}.katex .fontsize-ensurer.reset-size5.size5,.katex .sizing.reset-size5.size5{font-size:1em}.katex .fontsize-ensurer.reset-size5.size6,.katex .sizing.reset-size5.size6{font-size:1.2em}.katex .fontsize-ensurer.reset-size5.size7,.katex .sizing.reset-size5.size7{font-size:1.44em}.katex .fontsize-ensurer.reset-size5.size8,.katex .sizing.reset-size5.size8{font-size:1.73em}.katex .fontsize-ensurer.reset-size5.size9,.katex .sizing.reset-size5.size9{font-size:2.07em}.katex .fontsize-ensurer.reset-size5.size10,.katex .sizing.reset-size5.size10{font-size:2.49em}.katex .fontsize-ensurer.reset-size6.size1,.katex .sizing.reset-size6.size1{font-size:.41666667em}.katex .fontsize-ensurer.reset-size6.size2,.katex .sizing.reset-size6.size2{font-size:.58333333em}.katex .fontsize-ensurer.reset-size6.size3,.katex .sizing.reset-size6.size3{font-size:.66666667em}.katex .fontsize-ensurer.reset-size6.size4,.katex .sizing.reset-size6.size4{font-size:.75em}.katex .fontsize-ensurer.reset-size6.size5,.katex .sizing.reset-size6.size5{font-size:.83333333em}.katex .fontsize-ensurer.reset-size6.size6,.katex .sizing.reset-size6.size6{font-size:1em}.katex .fontsize-ensurer.reset-size6.size7,.katex .sizing.reset-size6.size7{font-size:1.2em}.katex .fontsize-ensurer.reset-size6.size8,.katex .sizing.reset-size6.size8{font-size:1.44166667em}.katex .fontsize-ensurer.reset-size6.size9,.katex .sizing.reset-size6.size9{font-size:1.725em}.katex .fontsize-ensurer.reset-size6.size10,.katex .sizing.reset-size6.size10{font-size:2.075em}.katex .fontsize-ensurer.reset-size7.size1,.katex .sizing.reset-size7.size1{font-size:.34722222em}.katex .fontsize-ensurer.reset-size7.size2,.katex .sizing.reset-size7.size2{font-size:.48611111em}.katex .fontsize-ensurer.reset-size7.size3,.katex .sizing.reset-size7.size3{font-size:.55555556em}.katex .fontsize-ensurer.reset-size7.size4,.katex .sizing.reset-size7.size4{font-size:.625em}.katex .fontsize-ensurer.reset-size7.size5,.katex .sizing.reset-size7.size5{font-size:.69444444em}.katex .fontsize-ensurer.reset-size7.size6,.katex .sizing.reset-size7.size6{font-size:.83333333em}.katex .fontsize-ensurer.reset-size7.size7,.katex .sizing.reset-size7.size7{font-size:1em}.katex .fontsize-ensurer.reset-size7.size8,.katex .sizing.reset-size7.size8{font-size:1.20138889em}.katex .fontsize-ensurer.reset-size7.size9,.katex .sizing.reset-size7.size9{font-size:1.4375em}.katex .fontsize-ensurer.reset-size7.size10,.katex .sizing.reset-size7.size10{font-size:1.72916667em}.katex .fontsize-ensurer.reset-size8.size1,.katex .sizing.reset-size8.size1{font-size:.28901734em}.katex .fontsize-ensurer.reset-size8.size2,.katex .sizing.reset-size8.size2{font-size:.40462428em}.katex .fontsize-ensurer.reset-size8.size3,.katex .sizing.reset-size8.size3{font-size:.46242775em}.katex .fontsize-ensurer.reset-size8.size4,.katex .sizing.reset-size8.size4{font-size:.52023121em}.katex .fontsize-ensurer.reset-size8.size5,.katex .sizing.reset-size8.size5{font-size:.57803468em}.katex .fontsize-ensurer.reset-size8.size6,.katex .sizing.reset-size8.size6{font-size:.69364162em}.katex .fontsize-ensurer.reset-size8.size7,.katex .sizing.reset-size8.size7{font-size:.83236994em}.katex .fontsize-ensurer.reset-size8.size8,.katex .sizing.reset-size8.size8{font-size:1em}.katex .fontsize-ensurer.reset-size8.size9,.katex .sizing.reset-size8.size9{font-size:1.19653179em}.katex .fontsize-ensurer.reset-size8.size10,.katex .sizing.reset-size8.size10{font-size:1.43930636em}.katex .fontsize-ensurer.reset-size9.size1,.katex .sizing.reset-size9.size1{font-size:.24154589em}.katex .fontsize-ensurer.reset-size9.size2,.katex .sizing.reset-size9.size2{font-size:.33816425em}.katex .fontsize-ensurer.reset-size9.size3,.katex .sizing.reset-size9.size3{font-size:.38647343em}.katex .fontsize-ensurer.reset-size9.size4,.katex .sizing.reset-size9.size4{font-size:.43478261em}.katex .fontsize-ensurer.reset-size9.size5,.katex .sizing.reset-size9.size5{font-size:.48309179em}.katex .fontsize-ensurer.reset-size9.size6,.katex .sizing.reset-size9.size6{font-size:.57971014em}.katex .fontsize-ensurer.reset-size9.size7,.katex .sizing.reset-size9.size7{font-size:.69565217em}.katex .fontsize-ensurer.reset-size9.size8,.katex .sizing.reset-size9.size8{font-size:.83574879em}.katex .fontsize-ensurer.reset-size9.size9,.katex .sizing.reset-size9.size9{font-size:1em}.katex .fontsize-ensurer.reset-size9.size10,.katex .sizing.reset-size9.size10{font-size:1.20289855em}.katex .fontsize-ensurer.reset-size10.size1,.katex .sizing.reset-size10.size1{font-size:.20080321em}.katex .fontsize-ensurer.reset-size10.size2,.katex .sizing.reset-size10.size2{font-size:.2811245em}.katex .fontsize-ensurer.reset-size10.size3,.katex .sizing.reset-size10.size3{font-size:.32128514em}.katex .fontsize-ensurer.reset-size10.size4,.katex .sizing.reset-size10.size4{font-size:.36144578em}.katex .fontsize-ensurer.reset-size10.size5,.katex .sizing.reset-size10.size5{font-size:.40160643em}.katex .fontsize-ensurer.reset-size10.size6,.katex .sizing.reset-size10.size6{font-size:.48192771em}.katex .fontsize-ensurer.reset-size10.size7,.katex .sizing.reset-size10.size7{font-size:.57831325em}.katex .fontsize-ensurer.reset-size10.size8,.katex .sizing.reset-size10.size8{font-size:.69477912em}.katex .fontsize-ensurer.reset-size10.size9,.katex .sizing.reset-size10.size9{font-size:.8313253em}.katex .fontsize-ensurer.reset-size10.size10,.katex .sizing.reset-size10.size10{font-size:1em}.katex .delimsizing.size1{font-family:KaTeX_Size1}.katex .delimsizing.size2{font-family:KaTeX_Size2}.katex .delimsizing.size3{font-family:KaTeX_Size3}.katex .delimsizing.size4{font-family:KaTeX_Size4}.katex .delimsizing.mult .delim-size1>span{font-family:KaTeX_Size1}.katex .delimsizing.mult .delim-size4>span{font-family:KaTeX_Size4}.katex .nulldelimiter{display:inline-block;width:.12em}.katex .op-symbol{position:relative}.katex .op-symbol.small-op{font-family:KaTeX_Size1}.katex .op-symbol.large-op{font-family:KaTeX_Size2}.katex .accent>.vlist>span,.katex .op-limits>.vlist>span{text-align:center}.katex .accent .accent-body>span{width:0}.katex .accent .accent-body.accent-vec>span{position:relative;left:.326em}.katex .mtable .vertical-separator{display:inline-block;margin:0 -.025em;border-right:.05em solid #000}.katex .mtable .arraycolsep{display:inline-block}.katex .mtable .col-align-c>.vlist{text-align:center}.katex .mtable .col-align-l>.vlist{text-align:left}.katex .mtable .col-align-r>.vlist{text-align:right}
+</style>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+        <link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 16px;
+                line-height: 1.6;
+            }
+        </style>
+        
+        <script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+        
+    </head>
+    <body class="vscode-light">
+        <h1 id="platform-based-programming-2020">Platform based programming, 2020</h1>
+<p>Author: Jakob Marušič</p>
+<ul>
+<li><a href="#platform-based-programming-2020">Platform based programming, 2020</a></li>
+<li><a href="#1-overview-of-platforms">1. Overview of platforms</a>
+<ul>
+<li><a href="#11-what-is-platform">1.1 What is platform?</a>
+<ul>
+<li><a href="#abstraction-levels-of-platform">Abstraction levels of platform</a></li>
+<li><a href="#platform-breakdown">Platform breakdown</a></li>
+</ul>
+</li>
+<li><a href="#12-web-platforms">1.2 Web platforms</a>
+<ul>
+<li><a href="#history">History</a></li>
+<li><a href="#https-properties">HTTP's properties</a></li>
+<li><a href="#web-platform-evolution">Web platform evolution</a></li>
+<li><a href="#2020-standard---mean-architecture">2020 standard - MEAN architecture</a></li>
+<li><a href="#rest---representational-state-transfer">REST - Representational State Transfer</a></li>
+<li><a href="#constraints-of-http">Constraints of HTTP</a></li>
+</ul>
+</li>
+<li><a href="#13-mobile-computing-platforms">1.3 Mobile computing platforms</a>
+<ul>
+<li><a href="#mobile-computer-development-timeline">Mobile computer development timeline</a></li>
+<li><a href="#mobile-operating-systems">Mobile operating systems</a></li>
+<li><a href="#constraints">Constraints</a></li>
+</ul>
+</li>
+<li><a href="#14-embedded-systems">1.4 Embedded systems</a>
+<ul>
+<li><a href="#constraints-1">Constraints</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#2-embedded-systems">2. Embedded systems</a>
+<ul>
+<li><a href="#21-conversions">2.1 Conversions</a>
+<ul>
+<li><a href="#211-analogue-to-digital-adc">2.1.1 Analogue to Digital (ADC)</a></li>
+<li><a href="#212-digital-to-analogue-dac">2.1.2 Digital to Analogue (DAC)</a></li>
+</ul>
+</li>
+<li><a href="#22-programming-mcu">2.2 Programming MCU</a></li>
+<li><a href="#3-arduino-programming">3. Arduino programming</a></li>
+<li><a href="#31-digital-vs-analogue-pins">3.1 Digital vs. Analogue Pins</a></li>
+<li><a href="#32-sketches">3.2 Sketches</a>
+<ul>
+<li><a href="#321-programming-io">3.2.1 Programming I/O</a></li>
+<li><a href="#322-arduino-library-functions">3.2.2 Arduino Library Functions</a></li>
+</ul>
+</li>
+<li><a href="#33-interupts">3.3 Interupts</a></li>
+<li><a href="#34-arduino-cross-compilation">3.4 Arduino Cross-Compilation</a></li>
+</ul>
+</li>
+<li><a href="#4-mobile-platform-programming">4. Mobile Platform Programming</a>
+<ul>
+<li><a href="#41-constraints--challenges">4.1 Constraints &amp; challenges</a></li>
+</ul>
+</li>
+<li><a href="#5-android-programming">5. Android programming</a>
+<ul>
+<li><a href="#51-architecture">5.1 Architecture</a>
+<ul>
+<li><a href="#511-key-android-features">5.1.1 Key Android Features</a></li>
+<li><a href="#512-linux-karnel-services">5.1.2 Linux Karnel Services</a></li>
+<li><a href="#513-native-libraries">5.1.3 Native Libraries</a></li>
+<li><a href="#514-android-runtime">5.1.4 Android Runtime</a></li>
+<li><a href="#515-application-framework">5.1.5 Application framework</a></li>
+</ul>
+</li>
+<li><a href="#52-basic-application-components">5.2 Basic application components</a></li>
+<li><a href="#53-activity-lifecycle">5.3 Activity Lifecycle</a>
+<ul>
+<li><a href="#531-oncreate">5.3.1 <code>onCreate</code></a></li>
+<li><a href="#532-onstart">5.3.2 <code>onStart</code></a></li>
+<li><a href="#533-onrestart">5.3.3 <code>onRestart</code></a></li>
+<li><a href="#534-onresume">5.3.4 <code>onResume</code></a></li>
+<li><a href="#535-onpause">5.3.5 <code>onPause</code></a></li>
+<li><a href="#536-onstop">5.3.6 <code>onStop</code></a></li>
+<li><a href="#537-ondestroy">5.3.7 <code>onDestroy</code></a></li>
+<li><a href="#538-placing-app-functionalities">5.3.8 Placing App Functionalities</a></li>
+<li><a href="#539-saving-activity-state">5.3.9 Saving Activity State</a></li>
+</ul>
+</li>
+<li><a href="#54-starting-activity-intent-task">5.4 Starting activity (Intent, Task)</a>
+<ul>
+<li><a href="#541-task">5.4.1 Task</a></li>
+<li><a href="#542-intent">5.4.2 Intent</a>
+<ul>
+<li><a href="#specifying-intentfilters">Specifying IntentFilters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#55-android-ui">5.5 Android UI</a>
+<ul>
+<li><a href="#551-view">5.5.1 View</a></li>
+<li><a href="#552-fragments">5.5.2 Fragments</a></li>
+<li><a href="#553-material-design">5.5.3 Material design</a>
+<ul>
+<li><a href="#navigator-drawer">Navigator drawer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#56-data-storage">5.6 Data Storage</a>
+<ul>
+<li><a href="#561-sharedpreferences">5.6.1 SharedPreferences</a></li>
+<li><a href="#562-file-storage">5.6.2 File Storage</a></li>
+<li><a href="#563-sqlite">5.6.3 SQLite</a></li>
+</ul>
+</li>
+<li><a href="#57-permissins">5.7 Permissins</a></li>
+<li><a href="#58-notifications">5.8 Notifications</a></li>
+<li><a href="#59-background-processing">5.9 Background Processing</a>
+<ul>
+<li><a href="#591-java-threads-and-handlers">5.9.1 Java Threads and Handlers</a></li>
+<li><a href="#592-services">5.9.2 Services</a></li>
+<li><a href="#593-broadcast">5.9.3 Broadcast</a></li>
+<li><a href="#594-intentservice">5.9.4 IntentService</a>
+<ul>
+<li><a href="#invoking-intentservice">Invoking IntentService</a></li>
+<li><a href="#handling-results">Handling results</a></li>
+</ul>
+</li>
+<li><a href="#595-asynctask-deprecated">5.9.5 AsyncTask <em>(deprecated)</em></a></li>
+<li><a href="#596-periodicoccasional-task-scheduling">5.9.6 Periodic/Occasional Task Scheduling</a>
+<ul>
+<li><a href="#wake-lock">Wake Lock</a></li>
+<li><a href="#alarmmanager">AlarmManager</a></li>
+</ul>
+</li>
+<li><a href="#597-doze-mode">5.9.7 Doze Mode</a></li>
+<li><a href="#598-workmanager">5.9.8 WorkManager</a></li>
+<li><a href="#599-conclusion---when-to-use-what">5.9.9 Conclusion - when to use what?</a></li>
+</ul>
+</li>
+<li><a href="#510-mobile-sensing">5.10 Mobile Sensing</a>
+<ul>
+<li><a href="#5101-sensor-framework">5.10.1 Sensor Framework</a></li>
+<li><a href="#5102-google-play-services">5.10.2 Google Play Services</a></li>
+</ul>
+</li>
+<li><a href="#511-mobile-sensing-and-machine-learning">5.11 Mobile Sensing and Machine Learning</a>
+<ul>
+<li><a href="#5111-supervised-learning">5.11.1 Supervised learning</a>
+<ul>
+<li><a href="#evaluating-classification">Evaluating classification</a></li>
+</ul>
+</li>
+<li><a href="#5112-naive-bayesian-classifier">5.11.2 Naive Bayesian Classifier</a></li>
+</ul>
+</li>
+<li><a href="#512-android-architeture-components">5.12 Android Architeture Components</a>
+<ul>
+<li><a href="#5121-model-view-controller-mvc">5.12.1 Model-View-Controller (MVC)</a></li>
+<li><a href="#5122-model-view-viewmodel-mvvm">5.12.2 Model-View-ViewModel (MVVM)</a>
+<ul>
+<li><a href="#viewmodel-class">ViewModel Class</a></li>
+<li><a href="#livedata-class">LiveData Class</a></li>
+<li><a href="#data-binding">Data Binding</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#513-managing-data-flow--object-relational-mapping">5.13 Managing Data Flow &amp; Object-relational Mapping</a>
+<ul>
+<li><a href="#5131-room-databse">5.13.1 Room Databse</a></li>
+<li><a href="#5132-entities">5.13.2 Entities</a></li>
+<li><a href="#5133-data-access-object-dao">5.13.3 Data Access Object (DAO)</a></li>
+<li><a href="#5134-database-instance">5.13.4 Database Instance</a></li>
+<li><a href="#5135-practical-considerations">5.13.5 Practical Considerations</a></li>
+</ul>
+</li>
+<li><a href="#514-network-communication">5.14 Network Communication</a>
+<ul>
+<li><a href="#5141-wireless-data-transmission">5.14.1 Wireless Data Transmission</a></li>
+<li><a href="#5142-web-abstraction">5.14.2 Web abstraction</a></li>
+<li><a href="#5143-best-practices-in-android-networking">5.14.3 Best Practices in Android Networking</a></li>
+<li><a href="#5144-backend-for-mobile-apps">5.14.4 Backend for Mobile Apps</a></li>
+</ul>
+</li>
+<li><a href="#515-hybrid-application-development">5.15 Hybrid Application Development</a>
+<ul>
+<li><a href="#5151-apache-cordova">5.15.1 Apache Cordova</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="1-overview-of-platforms">1. Overview of platforms</h1>
+<h2 id="11-what-is-platform">1.1 What is platform?</h2>
+<p><strong>Platform is the environment in which a software application is executed.</strong></p>
+<p><strong>Environment</strong> = hardware and/or software (e.g. computer architecture, operating systems, APIs, programming frameworks etc.).</p>
+<h3 id="abstraction-levels-of-platform">Abstraction levels of platform</h3>
+<p><em>From &quot;32-bit platform&quot; to &quot;Platform-as-a-service</em></p>
+<ol>
+<li><strong>Hardware level</strong> - processing capabilities, IO capabilities</li>
+<li><strong>Middleware level</strong> - drivers, operating systems</li>
+<li><strong>Higher level</strong> - APIs, Cloud, etc.</li>
+</ol>
+<h3 id="platform-breakdown">Platform breakdown</h3>
+<ul>
+<li>web platforms</li>
+<li>mobile platforms</li>
+<li>industrial/embedded platforms</li>
+<li>gaming platforms</li>
+</ul>
+<h2 id="12-web-platforms">1.2 Web platforms</h2>
+<blockquote>
+<p><strong>The Web is not equal to The Internet</strong>
+Web is most popular service running on top of the internet.</p>
+</blockquote>
+<h3 id="history">History</h3>
+<p>In 1989 Tim Berners-Lee joins hypertext with internet to create <strong>the World Wide Web</strong>, <em>Hypertext</em> is text document with references that can be immediately accessed.</p>
+<p>WWW creates a gloabl information space, storage is implemented via <strong>web servers</strong>, hypertext documents are written in <strong>HTML</strong> and communcation is done over internet with client-server protocol <strong>Hyper Transfer Protocol HTTP</strong>.</p>
+<h3 id="https-properties">HTTP's properties</h3>
+<p>HTTP uses <strong>request-response</strong> client-server protocol. Web browser (client) issues request and web server sends response (requests: GET, POST, PUT, DELETE, etc). For resource locators are used <strong>URLs</strong> (uniform resource locators) - URLs are translated to IP address using DNS (domain name system).</p>
+<p>HTTP is <strong>stateless</strong> protocol, for saving states cookies are used.</p>
+<p>HTTPS is used for encrypted communication.</p>
+<h3 id="web-platform-evolution">Web platform evolution</h3>
+<ol>
+<li><strong>Single-tier architecture</strong> - user interface, business logic and data are all within the same programme</li>
+<li><strong>Multi-tier architecture</strong> - different layer for presentation, logic and data. Better for scaling and upgrading, layers are more flexible</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Environment &amp; language</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Presentation layer (frontend)</td>
+<td>HTML5, JS, CSS</td>
+<td>dealing with UI, user iteractions</td>
+</tr>
+<tr>
+<td>Application/Business layer (backend)</td>
+<td>Java, .Net, Python, Rust, etc.</td>
+<td>dealing with app logic, data fetching, processing, etc.</td>
+</tr>
+<tr>
+<td>Data layer</td>
+<td>MySQL, Oracle, PostgreSQL, MsSQL, etc.</td>
+<td>deealing with data storage and organization (SQL vs NoSQL)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2020-standard---mean-architecture">2020 standard - MEAN architecture</h3>
+<blockquote>
+<p>M - MongoDB (database)<br>
+E - ExpressJS (server, backend)<br>
+A - Angular (JS framework, frontend)<br>
+N - Node.js (event-driven server-side and networking)</p>
+</blockquote>
+<p>Constraints: MongoDB is NoSQL (ACID transactions)</p>
+<h3 id="rest---representational-state-transfer">REST - Representational State Transfer</h3>
+<p>Rules:</p>
+<ul>
+<li>client-server model: black box to each other</li>
+<li>statelessness: server doesn't track state of client</li>
+<li>cacheability</li>
+<li>layered system</li>
+<li>uniform interface</li>
+</ul>
+<p>Constraints: <strong>Statelessness</strong> - client needs to send context, in practise developers implements their own solutions (adding headers, etc.)</p>
+<h3 id="constraints-of-http">Constraints of HTTP</h3>
+<ul>
+<li><strong>Expressivity of the HTTP vocabulary</strong> - can you accomplish everything with GET, POST, PUT, DELETE?</li>
+<li><strong>Keep-Alive connection</strong> - uses memory and other resources</li>
+<li><strong>Non secure by default</strong></li>
+</ul>
+<h2 id="13-mobile-computing-platforms">1.3 Mobile computing platforms</h2>
+<h3 id="mobile-computer-development-timeline">Mobile computer development timeline</h3>
+<p>| Year | |
+| 1994 | <strong>IBM Simon</strong> - first <em>&quot;smartphone&quot;</em> - celluar + email + faxing + apps |
+| late '90 | <strong>PDA</strong> (personal digital assistant) - early versions of mobile OS |
+| early '00 | mass adoption (BlackBerry) |
+| 2007 | <strong>iPhone</strong> |
+| 2008 | <strong>Android OS</strong> |
+| today | more than 1 bilion users |</p>
+<h3 id="mobile-operating-systems">Mobile operating systems</h3>
+<ol>
+<li><strong>Symbian</strong> - started in 1998, used by Nokia, Samsung, Sony Ericsson, etc., very resource efficient</li>
+<li><strong>iOS</strong> - specific hardware</li>
+<li><strong>Android</strong> - open source, based on Linux</li>
+</ol>
+<h3 id="constraints">Constraints</h3>
+<ul>
+<li><strong>Energy</strong></li>
+<li><strong>Processing</strong> - background processing is limited to minimize energy use</li>
+<li><strong>Wireless connectivity</strong></li>
+<li><strong>User interaction (responsiveness)</strong>, uniform user experience</li>
+</ul>
+<h2 id="14-embedded-systems">1.4 Embedded systems</h2>
+<p>Computer systems are often (98%) embedded in everyday objects. Today arround 100 bilion microcontrollers compared to 5 bilion smartphones and 2 bilion PCs.</p>
+<p>Embedded systems are very <strong>constrained systems</strong> (energy, autonomous operation, real-time operation, etc.). They interact with environment through sensors, react to it through actuator and communicate via wireless.</p>
+<p>Embedded systems are programmed in low-level languages, C, C++ or assembler. They are event-driven.
+Low priority tasks are executed in an infinite loop, high priority events are executed via interrupt routine.</p>
+<p>They can have real-time OS, specific purpose OS or none (only bootloader).</p>
+<h3 id="constraints-1">Constraints</h3>
+<ul>
+<li><strong>Hardware-aware development</strong></li>
+<li><strong>Limited resources</strong></li>
+<li>Deploy and forget</li>
+<li><strong>Extreme energy efficiency</strong></li>
+</ul>
+<h1 id="2-embedded-systems">2. Embedded systems</h1>
+<p>Goal of embedded systems is having working application that works efficiently (cost critical, safety critical, resource efficient).</p>
+<p><img src="file:///c:\Users\jakob\Documents\PSP\lectures\pics\embedded001.png" alt=""></p>
+<p><strong>Intellctual property core (IP Core)</strong> - reusable logic or a unit of functionality (eg. network controller).</p>
+<p><strong>Field-Programmable Gate Array (FPGA)</strong> - reconfigurable integrated circuit that contains an array of programmable logic blocks. Programmed to perform a specific functionality.</p>
+<p><strong>Microcontroller Unit (MCU)</strong> - scaled-down microprocessor (smaller, less processing power), connected to other components, sends commands and receives data.</p>
+<p><strong>Sensors</strong> - measure and detect physical properties and convert them to electric signals.</p>
+<p><strong>Actuators</strong> - cause events to occur in the environment, driven by signal from system, often require extra power to operate (screen, motor, LEDs, etc.).</p>
+<h2 id="21-conversions">2.1 Conversions</h2>
+<h3 id="211-analogue-to-digital-adc">2.1.1 Analogue to Digital (ADC)</h3>
+<p>Analogue input (ussualy from sensor) and digital output (limited numbers of bits -&gt; quantization error).</p>
+<p>ADC sampling rate - how frequently does the conversion happen?</p>
+<h3 id="212-digital-to-analogue-dac">2.1.2 Digital to Analogue (DAC)</h3>
+<p>Digital input (usually from processing part of system) and analog output (usually at an actuator). Boards like Arduino ussualy don't have built-in DAC.</p>
+<h2 id="22-programming-mcu">2.2 Programming MCU</h2>
+<p>MCU are programmed via cross-compilation (programmed on PC, transfered to MCU).</p>
+<p><strong>Toolchain</strong> - a set of tools need to perform a software development task.</p>
+<p><img src="file:///c:\Users\jakob\Documents\PSP\lectures\pics\embedded002.png" alt=""></p>
+<p><strong>Process</strong> - an abstraction encapsulating a set of processing tasks:</p>
+<ul>
+<li>instructions</li>
+<li>resources assigned to it</li>
+<li>context - processor state while the process is being executed</li>
+</ul>
+<p><img src="file:///c:\Users\jakob\Documents\PSP\lectures\pics\embedded003.png" alt=""></p>
+<h2 id="3-arduino-programming">3. Arduino programming</h2>
+<h2 id="31-digital-vs-analogue-pins">3.1 Digital vs. Analogue Pins</h2>
+<p>Digital I/O pins - read&amp;write digital input(low or high), output (0V or 5V).</p>
+<p>Analogue I/O pins - read analogue voltage (used for sensor interaction), pin is connected to ADC (resolution is 10 bits).</p>
+<h2 id="32-sketches">3.2 Sketches</h2>
+<p><strong>Sketch</strong> is arduino programme usually written in C, contains <em>setup()</em>, <em>loop()</em> (but no <em>main()</em>).</p>
+<h3 id="321-programming-io">3.2.1 Programming I/O</h3>
+<p>Mode setting (Pin: 0-13 digital, A0-A5 analogue; Mode: INPUT, OUTPUT, INPUT_PULLUP)</p>
+<pre><code class="language-c"><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">pinMode</span><span class="hljs-params">(pin, mode)</span></span>;
+</div></code></pre>
+<p>Digital input - returns state of digital pin (LOW/HIGH)</p>
+<pre><code class="language-c"><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">digitalRead</span><span class="hljs-params">(pin)</span>
+</span></div></code></pre>
+<p>Digital output</p>
+<pre><code class="language-c"><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">digitalWrite</span><span class="hljs-params">(pin, value)</span>
+</span></div></code></pre>
+<p>Analogue input (returns from 0 to 1023)</p>
+<pre><code class="language-c"><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">analogueRead</span><span class="hljs-params">(pin)</span>
+</span></div></code></pre>
+<p>Analogue write (value from 0 to 255)</p>
+<pre><code class="language-c"><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">analogWrite</span><span class="hljs-params">(pin, value)</span>
+</span></div></code></pre>
+<h3 id="322-arduino-library-functions">3.2.2 Arduino Library Functions</h3>
+<pre><code class="language-c"><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">delay</span><span class="hljs-params">(val)</span> <span class="hljs-comment">// pauses programme for val milliseconds</span>
+<span class="hljs-keyword">long</span> <span class="hljs-title">millis</span><span class="hljs-params">()</span> <span class="hljs-comment">// returns number of milliseconds since programme started</span>
+<span class="hljs-keyword">void</span> <span class="hljs-title">tone</span><span class="hljs-params">(pin, frequency, duration)</span> <span class="hljs-comment">//generate square wave of specified frequency</span>
+</span></div></code></pre>
+<h2 id="33-interupts">3.3 Interupts</h2>
+<p>Signals telling the MCU that there is an event requiring immediate attention.</p>
+<pre><code class="language-c"><div><span class="hljs-comment">//react when pin experiences ```mode(change)``` by firing the ISR</span>
+attachInterrupt(digitalPinToInterrupt(pin), ISR, mode)
+
+<span class="hljs-comment">//pin no longer reacts to interrupts</span>
+detachInterrupt(digitalPinToInterrupt(pin))
+
+noInterrupts()
+interrupts()
+</div></code></pre>
+<h2 id="34-arduino-cross-compilation">3.4 Arduino Cross-Compilation</h2>
+<p><strong>avr-gcc</strong> is invoked to cross-compile the code:</p>
+<ul>
+<li>AVR - microcontroller family</li>
+<li>GCC - C/C++ compiler</li>
+<li>generates an object file (.o)</li>
+<li>links object file with Arduino library files</li>
+<li>result is .elf file</li>
+</ul>
+<p><strong>avr-objcopy</strong> is invoked to change the format of exec from <code>.elf</code> to <code>.hex</code> that board understands</p>
+<p><strong>avrdude</strong> uploads the code to the board</p>
+<h1 id="4-mobile-platform-programming">4. Mobile Platform Programming</h1>
+<h2 id="41-constraints--challenges">4.1 Constraints &amp; challenges</h2>
+<ul>
+<li>energy</li>
+<li>processing constraints: app gets only small share of the total resources</li>
+<li>user iteraction constraints: interactions should be intuitive and responsive despite limitations</li>
+<li>uniform user experience: app should support a range of devices</li>
+<li>wireless constraints</li>
+<li>context sensing challenges: inconsistent sensors, raw data has to be processed to use on high-level</li>
+<li>security &amp; privacy</li>
+</ul>
+<h1 id="5-android-programming">5. Android programming</h1>
+<h2 id="51-architecture">5.1 Architecture</h2>
+<p><strong>The android platform</strong> contains: Android mobile OS, Android libraries (androidx, suppor libraries, 3rd party,...), applications frameworks and key apps.</p>
+<h3 id="511-key-android-features">5.1.1 Key Android Features</h3>
+<ol>
+<li><strong>Tailored for battery-powered devices</strong> - process managment, when app is not used is gets suspended</li>
+<li><strong>Tailored for low-memory devices</strong> - when memory is low, suspended apps are terminated</li>
+<li><strong>Support for direct manipulation interfaces</strong> - touchscreen gestures, sensors, notifications</li>
+<li><strong>Open ecosystem for applications</strong></li>
+</ol>
+<p><img src="file:///c:\Users\jakob\Documents\PSP\lectures\pics\android001.png" alt=""></p>
+<h3 id="512-linux-karnel-services">5.1.2 Linux Karnel Services</h3>
+<ol>
+<li><strong>Memory and process managment</strong>
+<ul>
+<li>usually one process per app,</li>
+<li>process has allocated certain amount of memory</li>
+<li>Android automatically manages process lifecycle</li>
+<li>interprocess communication</li>
+</ul>
+</li>
+<li><strong>Security managment</strong>
+<ul>
+<li>base on Security-Enhanced Linux</li>
+<li>only karnel and few apps runs as root</li>
+<li>each app has unique UID and runs in sandbox</li>
+<li>each app gets set of permissions (permissions can be restricted by user)</li>
+</ul>
+</li>
+<li><strong>Power managment</strong>
+<ul>
+<li>screen diming, process killing</li>
+<li>wakelocks (preventing device from going to sleep)</li>
+<li><em>Project Volta</em> - OS takes care of scheduling periodic jobs for the apps</li>
+</ul>
+</li>
+<li><strong>File&amp;network I/O</strong></li>
+<li><strong>Devices drivers</strong></li>
+</ol>
+<h3 id="513-native-libraries">5.1.3 Native Libraries</h3>
+<ul>
+<li>system C library</li>
+<li>surface manager (composing windows on the screen)</li>
+<li>open GL</li>
+<li>openMAX (audio, video, image processing)</li>
+<li>media framework (recording&amp;playback of audio, video, photos)</li>
+<li>SQLite</li>
+<li>Webkit</li>
+<li>Neural network API</li>
+</ul>
+<h3 id="514-android-runtime">5.1.4 Android Runtime</h3>
+<ol>
+<li><strong>ANdroid core libraries</strong> - beside standard Java libraries</li>
+<li><strong>Process virtual machine (VM)</strong> - Dalvik/Android runtime</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Android runtime (ART)</th>
+<th>Dalvik</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>when .apk is installed, ART uses ahead-of-time compilation to convert it and save it as native machine code</td>
+<td>trace-base just-in-time compilation</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Compilation and workflow (with Android Runtime)</strong>:</p>
+<ol>
+<li>App witten in Java/Kotlin</li>
+<li>Compiled to Java bytecode <em>(.class file)</em></li>
+<li>DX converts Java bytecode to a single DEX bytecode file <em>(.dex file)</em> optimised for space</li>
+<li><em>.apk</em> file is generated with the dex file and all application resources, manifest, etc.</li>
+</ol>
+<h3 id="515-application-framework">5.1.5 Application framework</h3>
+<ol>
+<li><strong>Package manager</strong>:
+<ul>
+<li>keeps track of the installed applications</li>
+</ul>
+</li>
+<li><strong>Window manager</strong>:
+<ul>
+<li>manages application's windows</li>
+</ul>
+</li>
+<li><strong>Content providers</strong>:
+<ul>
+<li>applications are sandboxed</li>
+<li>content provider manages acess data between applications</li>
+</ul>
+</li>
+<li><strong>Location manager</strong>:
+<ul>
+<li>provides location and movement information</li>
+<li>ways to access location info: directly through location manager or using Google Play Location Services (preferred)</li>
+</ul>
+</li>
+<li><strong>Notification manager</strong>:
+<ul>
+<li>also allows to peek into other applications' notifications</li>
+</ul>
+</li>
+<li><strong>Resources manager</strong>: Android application resources - non-compiled static content of application (images, music, etc.)
+<ul>
+<li>support for different screen sizes, orientations, languages, platform versions,...</li>
+</ul>
+</li>
+<li><strong>Activity manager</strong>:
+<ul>
+<li>manages application lifecycle and navigation through the stack of applicaton pages taht a user sees</li>
+</ul>
+</li>
+<li><strong>View system</strong> - for building app's user interface
+<ul>
+<li>defined by an XML file</li>
+</ul>
+</li>
+</ol>
+<h2 id="52-basic-application-components">5.2 Basic application components</h2>
+<ol>
+<li><strong>Activity</strong> - has a graphical user interface (GUI)</li>
+<li><strong>Service</strong> - performs background processing</li>
+<li><strong>BroadcastReceiver</strong> - subscribes to events of interest</li>
+<li><strong>Intent</strong> - communicates an intention to perform an action</li>
+<li><strong>CntentProvider</strong> - encapsulates and exposes data</li>
+</ol>
+<h2 id="53-activity-lifecycle">5.3 Activity Lifecycle</h2>
+<p>Activities are kept active only when user can iteracts with them, when not in use (in background) there are stopped. If OS needs resources activities may be destroyed.</p>
+<p><strong>Activity state</strong></p>
+<ol>
+<li>Active or running - in the foreground, visible and user can iteracts with them</li>
+<li>Paused - lost focus, but still visible, maintains state and member information</li>
+<li>Sopped - completely obscured by another activity, retains state and member information, however, no longer visible and it could be terminated by the OS</li>
+</ol>
+<h3 id="531-oncreate">5.3.1 <code>onCreate</code></h3>
+<p>Activity triggers:</p>
+<pre><code class="language-java"><div><span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span><span class="hljs-params">(Bundle savedInstanceState)</span>
+</span></div></code></pre>
+<p><code>onCreate()</code> is called when activity is first created, it sets up initial state (create and configure views, set activity's content view, bind data, etc.). Method also gets Bundle with Activity's previous state.</p>
+<h3 id="532-onstart">5.3.2 <code>onStart</code></h3>
+<p>Activity triggers:</p>
+<pre><code class="language-java"><div><span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onStart</span><span class="hljs-params">()</span>
+</span></div></code></pre>
+<p><code>onStart()</code> is called when activity becomes visible.</p>
+<h3 id="533-onrestart">5.3.3 <code>onRestart</code></h3>
+<p>Activity triggers:</p>
+<pre><code class="language-java"><div><span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onRestart</span><span class="hljs-params">()</span>
+</span></div></code></pre>
+<p><code>onRestart()</code> is called when activity is becoming visible, after being stopped. Will be followed by <code>onStart()</code> and <code>onResume()</code>.</p>
+<h3 id="534-onresume">5.3.4 <code>onResume</code></h3>
+<p>Activity triggers:</p>
+<pre><code class="language-java"><div><span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onResume</span><span class="hljs-params">()</span>
+</span></div></code></pre>
+<p><code>onResume()</code> is called when activity is visible and is about to start iteracting with user. In it we start foreground-only activities (e.g. getting user location and show it on the map).</p>
+<h3 id="535-onpause">5.3.5 <code>onPause</code></h3>
+<p>Activity triggers:</p>
+<pre><code class="language-java"><div><span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onPause</span><span class="hljs-params">()</span>
+</span></div></code></pre>
+<p><code>onPause()</code> is called when activity loses focus and another activity is about to start. We use it to commit unsaved changes to persist data, stop animations and CPU-intensive processing. Processing in this method should be done quickly, because next activity will not start until this method ends.</p>
+<h3 id="536-onstop">5.3.6 <code>onStop</code></h3>
+<p>Activity triggers:</p>
+<pre><code class="language-java"><div><span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onStop</span><span class="hljs-params">()</span>
+</span></div></code></pre>
+<p><code>onStop()</code> is called when activity is no longer visible (because another activity is being started for example). We release resources that are not needed while the activity is not visible and we perform CPU-heavy shutdown operations. After this method still exists but is no longer connected to Window Manager.</p>
+<h3 id="537-ondestroy">5.3.7 <code>onDestroy</code></h3>
+<p>Activity triggers:</p>
+<pre><code class="language-java"><div><span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onDestroy</span><span class="hljs-params">()</span>
+</span></div></code></pre>
+<p><code>onDestroy()</code> is called when activity is about to get destroyed (when <code>finish()</code> is called or when OS calls it). In it resources are released (such as Threads).</p>
+<p><em>It may not be called if Android kills application.</em></p>
+<h3 id="538-placing-app-functionalities">5.3.8 Placing App Functionalities</h3>
+<table>
+<thead>
+<tr>
+<th>Functionality</th>
+<th>Method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Instantiate member variables of the class</td>
+<td><code>onCreate()</code></td>
+</tr>
+<tr>
+<td>Register listener for events</td>
+<td><code>onResume()</code> or <code>onStart()</code></td>
+</tr>
+<tr>
+<td>Unregister listeners for events</td>
+<td><code>onPause()</code> or <code>onStop()</code></td>
+</tr>
+<tr>
+<td>Kill threads that the activity has spawned</td>
+<td><code>onDestroy()</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="539-saving-activity-state">5.3.9 Saving Activity State</h3>
+<p><code>onSaveInstanceState()</code> is called when activity gets stopped in it we store state in Bundle. It is not part of the lifecycle. In a bundle we should store only &quot;Light&quot; values and not big objects.</p>
+<p>Bundle is restored in <code>onRestoreInstanceState()</code> or in <code>onCreate()</code>.</p>
+<h2 id="54-starting-activity-intent-task">5.4 Starting activity (Intent, Task)</h2>
+<p>To start activity we have to create Intent specifying activity to start, then we pass intent to one of the methods:</p>
+<ul>
+<li><code>startActivity()</code> - launches activity described by the intent</li>
+<li><code>startActivityForResult()</code> - we excpect result to be returned from started activity (via <code>setResult()</code>)</li>
+</ul>
+<h3 id="541-task">5.4.1 Task</h3>
+<p><strong>Task</strong> is collection of Activities that users iteracts when performing certain job. Activities in task could be from the same application or not.</p>
+<p><strong>Backstact</strong> - activities are arranged in a stack in the order of creations. When launched activity is pushed on top of stacka nd when destroyed activity is popped of stack. In the backstack there can be more then one instance of same activity.</p>
+<h3 id="542-intent">5.4.2 Intent</h3>
+<p><strong>Intent</strong> is data structure that represents an operation to be performed or event that has occured. It serves as a glue between activities and it holds abstract description of an action to be performed.</p>
+<p>Intent filds: action, data, category, type, component, extras.</p>
+<p><strong>Action field</strong> represents desired operation (e.g. <em>ACTION_DIAL</em> dial number)</p>
+<pre><code class="language-java"><div>Intent i = <span class="hljs-keyword">new</span> Intent (Intent.ACTION_DIAL);
+</div></code></pre>
+<p><strong>Data field</strong> is formated like URI (e.g. <code>Uri.parse(&quot;content://contacts/people/1&quot;)</code> contact of a person 1)</p>
+<pre><code class="language-java"><div>Intent newIntent = <span class="hljs-keyword">new</span> Intent(Intent.ACTION_VIEW, Uri.Parse(<span class="hljs-string">"geo:0,0?q=Ljubljana, Slovenia, 1000"</span>))
+</div></code></pre>
+<p><strong>Category field</strong> - gives additional information about component that handles intent (e.g. CATEGORY_BROWSABLE can be invoked by browser).</p>
+<p><strong>Type field</strong> - specifies MIME (internet standard) type of intent data (e.g. <code>image/*</code>, <code>image/png</code>) .</p>
+<p><strong>Component filed</strong> - specifies explicit name of component class to use in intent. If component field is set then the implicit matching is skipped, and the specified component is launched. In this case all of the other Intent attributes become optional.</p>
+<p><strong>Extras field</strong> - Bundle of additional information associated with intent.</p>
+<pre><code class="language-java"><div>Intent i = <span class="hljs-keyword">new</span> Intent(Intent.ACTION_SEND);
+i.putExtra(String name, String value);
+</div></code></pre>
+<h4 id="specifying-intentfilters">Specifying IntentFilters</h4>
+<p>Setting activity to handle sending text and media</p>
+<pre><code class="language-xml"><div><span class="hljs-tag">&lt;<span class="hljs-name">activity</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"ShareActivity"</span>&gt;</span>
+<span class="hljs-comment">&lt;!-- This activity also handles "SEND" and "SEND_MULTIPLE" with media data --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">intent-filter</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">action</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.intent.action.SEND"</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">action</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.intent.action.SEND_MULTIPLE"</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">category</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.intent.category.DEFAULT"</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">data</span> <span class="hljs-attr">android:mimeType</span>=<span class="hljs-string">"application/vnd.google.panorama360+jpg"</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">data</span> <span class="hljs-attr">android:mimeType</span>=<span class="hljs-string">"image/*"</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">data</span> <span class="hljs-attr">android:mimeType</span>=<span class="hljs-string">"video/*"</span>/&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">intent-filter</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">activity</span>&gt;</span>
+</div></code></pre>
+<h2 id="55-android-ui">5.5 Android UI</h2>
+<h3 id="551-view">5.5.1 View</h3>
+<p>View is the main class on which the View System operates, it is responsible for drawing itself and handlign events. From View we derive other UI objects (button, edittext, mapview,...). View and its derived classes can be instantiated through XML code or Java source code.</p>
+<p><strong>AdapterViews</strong> - separation between data and child views. Adapter manages data and provides it to views. (example ListView).</p>
+<p><strong>View events</strong> - stem for user iteraction and lifecycle changes. Listeners are used for handling View events (<code>OnClickListener.onClick()</code>).</p>
+<pre><code class="language-java"><div><span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span><span class="hljs-params">(Bundle savedValues)</span> </span>{
+    ...
+    <span class="hljs-comment">// Capture our button from layout</span>
+    Button button = (Button)findViewById(R.id.button);
+    <span class="hljs-comment">// Register the onClick listener with the implementation above</span>
+    button.setOnClickListener(mListener);
+    ...
+}
+
+<span class="hljs-keyword">private</span> OnClickListener mListener = <span class="hljs-keyword">new</span> OnClickListener() {
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onClick</span><span class="hljs-params">(View v)</span> </span>{
+    <span class="hljs-comment">// do something when the button is clicked</span>
+    }
+};
+</div></code></pre>
+<h3 id="552-fragments">5.5.2 Fragments</h3>
+<p>Main purpose of fragments is to support more dynamic and flexible UI designs and UI element reusability. Fragment has layout and lifecycle, but unlike activity, fragment needs parent activity, doesn't need to be the only fragment on the screen and doesn't talk directly to other fragments.</p>
+<p>In fragment we can access context or parent activity through <code>getContext()</code> or <code>getActivity()</code>. Activity can access fragment via FragmentManager <code>findFragmentByID()</code> or <code>findFragmentByTag()</code>.</p>
+<pre><code class="language-xml"><div><span class="hljs-tag">&lt;<span class="hljs-name">LinearLayout</span>
+    <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">"http://schemas.android.com/apk/res/android"</span>
+    <span class="hljs-attr">android:orientation</span>=<span class="hljs-string">"horizontal"</span>
+    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span>
+    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">fragment</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"com.example.news.ArticleListFragment"</span>
+            <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/list"</span>
+            <span class="hljs-attr">android:layout_weight</span>=<span class="hljs-string">"1"</span>
+            <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"0dp"</span>
+            <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">fragment</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"com.example.news.ArticleReaderFragment"</span>
+            <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/viewer"</span>
+            <span class="hljs-attr">android:layout_weight</span>=<span class="hljs-string">"2"</span>
+            <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"0dp"</span>
+            <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">LinearLayout</span>&gt;</span>
+</div></code></pre>
+<pre><code class="language-java"><div>FragmentManager fragmentManager = getSupportFragmentManager();
+FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+ExampleFragment fragment = <span class="hljs-keyword">new</span> ExampleFragment();
+fragmentTransaction.add(R.id.fragment_container, fragment);
+fragmentTransaction.commit();
+</div></code></pre>
+<h3 id="553-material-design">5.5.3 Material design</h3>
+<p>Guidelines for designing UI components, it is a design library that has to be included as a dependency in module. It includes components like CoordinatorLayout, BottomSheet, FloatingActionBar, Tabs, etc.</p>
+<h4 id="navigator-drawer">Navigator drawer</h4>
+<p>Navigation drawer includes:</p>
+<ul>
+<li><strong>main layout</strong> that is shown when the drawer is pulled in</li>
+<li><strong>NavigationView</strong> that is shown when the drawer is pulled out</li>
+</ul>
+<pre><code class="language-xml"><div><span class="hljs-tag">&lt;<span class="hljs-name">androidx.drawerlayout.widget.DrawerLayout</span> …&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">include</span>
+        <span class="hljs-attr">layout</span>=<span class="hljs-string">"@layout/some_main_layout"</span>
+        <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span>
+        <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">com.google.android.material.navigation.NavigationView</span>
+        <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/nav_view"</span>
+        <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"wrap_content"</span>
+        <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span>
+        <span class="hljs-attr">android:layout_gravity</span>=<span class="hljs-string">"start"</span>
+        <span class="hljs-attr">android:fitsSystemWindows</span>=<span class="hljs-string">"true"</span>
+        <span class="hljs-attr">app:headerLayout</span>=<span class="hljs-string">"@layout/nav_header"</span>
+        <span class="hljs-attr">app:menu</span>=<span class="hljs-string">"@menu/navigation_menu"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">androidx.drawerlayout.widget.DrawerLayout</span>&gt;</span>
+</div></code></pre>
+<p><code>ActionBarDrawerToggle</code> defines how the ActionBar and DrawerLayout will iteracts, it also detects when drawer is opened or closed.</p>
+<p><strong>Fragment navigation with navigation drawer</strong> -first child should be a placeholder for fragments (usually FrameLayout). NavigationView's <code>onNavigationItemSelected()</code> should:</p>
+<ol>
+<li>create new fragment</li>
+<li>call FragmentManager that begins transaction to replace content of the placeholder</li>
+<li>transactions has to be commited</li>
+</ol>
+<h2 id="56-data-storage">5.6 Data Storage</h2>
+<h3 id="561-sharedpreferences">5.6.1 SharedPreferences</h3>
+<p>In SharedPreferences we store small amount of primitive type. Data is stored on device in <strong>key-value pairs</strong> and only app that creates it can access it. When app is unistalled from device, SharedPreferences are deleted from device.</p>
+<p>Common use: user preferences (usename, customization, etc.), some logic variables (is app launched for the first time, etc.).</p>
+<p><strong>Writing data</strong></p>
+<pre><code class="language-java"><div>SharedPreferences settings = getApplicationContext().getSharedPreferences(<span class="hljs-string">"preferences"</span>, MODE_PRIVATE);
+SharedPreferences.Editor editor = settings.edit();
+editor.putBoolean(<span class="hljs-string">"launched"</span>, <span class="hljs-keyword">true</span>);
+editor.commit();
+</div></code></pre>
+<p><code>commit()</code> - synchronous or <code>apply()</code> changes in-memory object immediatly, but writes on disk asynchronously (better to use it in main thread then commit).</p>
+<p><strong>Reading data</strong></p>
+<pre><code class="language-java"><div>SharedPreferences settings = getApplicationContext().getSharedPreferences(<span class="hljs-string">"preferences"</span>, MODE_PRIVATE);
+<span class="hljs-keyword">boolean</span> wasLaunched = settings.getBoolean(<span class="hljs-string">"launched"</span>, <span class="hljs-keyword">false</span>);
+</div></code></pre>
+<h3 id="562-file-storage">5.6.2 File Storage</h3>
+<p>Android uses common Java File API, that means that files can be saved as internal or external files</p>
+<table>
+<thead>
+<tr>
+<th>Internal files</th>
+<th>External files</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Part of non-removable storage that is not shared among apps</td>
+<td>Removable or non-removable storage that is shared among apps</td>
+</tr>
+<tr>
+<td>Always available</td>
+<td>Not always available (can be stored to external, USB, storage)</td>
+</tr>
+<tr>
+<td>By default, only accessible by app that created it</td>
+<td>world-readable</td>
+</tr>
+<tr>
+<td>When app is unistalled, files are deleted</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-java"><div><span class="hljs-comment">// Internal</span>
+File file = <span class="hljs-keyword">new</span> File(context.getExternalFilesDir(
+        Environment.DIRECTORY_PICTURES), albumName
+    );
+
+<span class="hljs-comment">// External</span>
+File file = <span class="hljs-keyword">new</span> File(Environment.getExternalStoragePublicDirectory(
+        Environment.DIRECTORY_PICTURES),albumName
+    );
+</div></code></pre>
+<h3 id="563-sqlite">5.6.3 SQLite</h3>
+<p>Relational database kept in a single file (write operation gets exclusive lock over app) that supports ACID transactions (Atomic, Consistent, Isolated and Durable).</p>
+<p>Use SQLite when SQL queries can be used for improved data presentation. Database will be removed after app is unistalled.</p>
+<h2 id="57-permissins">5.7 Permissins</h2>
+<p>Android apps are andboxed with user and group ID that are unique. By default only most basic functionalities are available to an application, other have to be explicitly asked for.</p>
+<p>Permissions are declared in ˙AndroidManifest.xml`.</p>
+<pre><code class="language-xml"><div><span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.ACCESS_FINE_LOCATION"</span>/&gt;</span>
+</div></code></pre>
+<p>Normal permissions like FLASHLIGHT, VIBRATE, BLUETOOTH will be automatically granted by OS. For more dangerous permissions (like READ_CONTACTS, SEND_SMS, etc.) the OS will explicitly ask user to grant access.</p>
+<p><strong>Custom permissions</strong> can be added to application if application performs privileged/dangerous function.</p>
+<pre><code class="language-xml"><div><span class="hljs-tag">&lt;<span class="hljs-name">permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"com.testpackage.mypermission"</span>
+<span class="hljs-attr">android:label</span>=<span class="hljs-string">"my_permission"</span>
+<span class="hljs-attr">android:protectionLevel</span>=<span class="hljs-string">"dangerous"</span>/&gt;</span>
+</div></code></pre>
+<p>Any app that calls this app has to request <code>&quot;com.testpackage.mypermission&quot;</code>.</p>
+<p><strong>Permission design</strong></p>
+<ul>
+<li>do not request permissions unless permission is needed</li>
+<li>show immediate benefit of granting permision</li>
+<li>use intents to call other app in case you don't need to handle functionaity within app</li>
+</ul>
+<h2 id="58-notifications">5.8 Notifications</h2>
+<p>Notifications are managed via <code>NotificationManager</code> (or, preferably, via <code>NotificationManagerCompat</code>), notification is posted via <code>notify()</code> and clered via <code>cancel()</code> and <code>cancelAll()</code>.</p>
+<pre><code class="language-java"><div>notification = <span class="hljs-keyword">new</span> NotificationCompat.Builder(<span class="hljs-keyword">this</span>)
+    .setContentTitle(notificationTitle)
+    .setContentText(notificationText)
+    .setSmallIcon(R.drawable.icon)
+    .setContentIntent(pendingIntent).build();
+</div></code></pre>
+<h2 id="59-background-processing">5.9 Background Processing</h2>
+<p><strong>UI (Main) Thread</strong> is created and started when application is launched - loops infinetely and listens for events on UI components. Intensive work can prevent UI thread from processing UI interaction tasks. That is why heavy/slow operations should be run in background threads.</p>
+<h3 id="591-java-threads-and-handlers">5.9.1 Java Threads and Handlers</h3>
+<p>The most general method. Straightforward solution - create worker Thread, put infinite loop in it and listen for new tasks. Each task is executed and result is reported back to the UI Thread via a <em>Handler</em>. If looped is broken, thread is killed.</p>
+<p><strong>Looper</strong> keeps thread alive in an infinite loop (automatically created for UI thread).</p>
+<p><strong>MessageQueue</strong> hold Messages/Runnables for thread (message for passing data to thread, runnable - task that is executed when thread is free)</p>
+<p><strong>Handler</strong> associated with particular thread and allows sending messages/runnables to the MessageQueue and process them.</p>
+<p><img src="file:///c:\Users\jakob\Documents\PSP\lectures\pics\android002.png" alt=""></p>
+<h3 id="592-services">5.9.2 Services</h3>
+<p>Activities runon main (UI) thread and have UI attached. Services can run on either main or separated threads and don't have UI attached. Services are more independent then threads and they run even after Activity is destroyed.</p>
+<p><strong>Background services</strong> for actions that do not have to be noticed by the user. <strong>Foreground services</strong> are actions that user needs to be aware of and should have control of (e.g. music player app). Foreground service must show a notification.</p>
+<p><img src="file:///c:\Users\jakob\Documents\PSP\lectures\pics\android003.png" alt=""></p>
+<p><strong>Bound Services</strong> are like servers in client-server paradigm, they are started through binding and they return IBinder object. Services remains running as long as connection is established.</p>
+<h3 id="593-broadcast">5.9.3 Broadcast</h3>
+<p>Broadcasts allows messages (warpped in Intents) to be sent from other components of app, other apps or from Android system.</p>
+<pre><code class="language-java"><div>Intent intent = <span class="hljs-keyword">new</span> Intent();
+intent.setAction(ACTION);
+intent.putExtra(STOP_SERVICE_BROADCAST_KEY, RQS_STOP_SERVICE);
+sendBroadcast(intent);
+</div></code></pre>
+<p>Broadcasts are captured in an app/component if BroadcastReceiver is registered in the code.</p>
+<pre><code class="language-java"><div><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NotifyServiceReceiver</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BroadcastReceiver</span></span>{
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onReceive</span><span class="hljs-params">(Context arg0, Intent arg1)</span> </span>{
+        …
+    }
+}
+</div></code></pre>
+<p>You can register for receiving only certain kinds of Intents:</p>
+<pre><code class="language-java"><div>IntentFilter intentFilter = <span class="hljs-keyword">new</span> IntentFilter();
+intentFilter.addAction(ACTION);
+registerReceiver(notifyServiceReceiver, intentFilter);
+</div></code></pre>
+<p>Broadcast receiver should also be registered in <code>AndroidManifest.xml</code>, then <code>onReceive()</code> is implmented in code:</p>
+<pre><code class="language-xml"><div><span class="hljs-tag">&lt;<span class="hljs-name">receiver</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">".MyBroadcastReceiver"</span> <span class="hljs-attr">android:exported</span>=<span class="hljs-string">"true"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">intent-filter</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">action</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.intent.action.BOOT_COMPLETED"</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">action</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.intent.action.INPUT_METHOD_CHANGED"</span>/&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">intent-filter</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">receiver</span>&gt;</span>
+</div></code></pre>
+<pre><code class="language-java"><div><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyBroadcastReceiver</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BroadcastReceiver</span> </span>{
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onReceive</span><span class="hljs-params">(Context context, Intent intent)</span> </span>{
+
+    }
+}
+</div></code></pre>
+<h3 id="594-intentservice">5.9.4 IntentService</h3>
+<p><strong>IntentService</strong> is Service that runs on separated thread and queues up requests and processes them one by one. It is suitable for <em>long running one-off tasks</em> when programmer doesn't want to affect UI responsiveness. IntentService survives Activity lifecycle changes and is called using explicit Intent (started on demand, stopped when it runs out of work).</p>
+<ol>
+<li>IntentService should be defined in <code>AndroidManifest.xml</code>:</li>
+</ol>
+<pre><code class="language-xml"><div><span class="hljs-tag">&lt;<span class="hljs-name">service</span>
+    <span class="hljs-attr">android:name</span>=<span class="hljs-string">".FetchAddressIntentService"</span>
+    <span class="hljs-attr">android:exported</span>=<span class="hljs-string">"false"</span>/&gt;</span>
+</div></code></pre>
+<ol start="2">
+<li>Class where IntentService is used should be extended with <code>IntentService</code>:</li>
+</ol>
+<pre><code class="language-java"><div><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FetchAddressIntentService</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">IntentService</span> </span>{}
+</div></code></pre>
+<h4 id="invoking-intentservice">Invoking IntentService</h4>
+<p>IntentService is created with explicit Intent and started using <code>startService()</code>. Additional data can be added using extra field.</p>
+<h4 id="handling-results">Handling results</h4>
+<p>To handle results <code>BroadcastReceiver</code> has to be implemented in Activity (with <code>onReceive()</code>)</p>
+<pre><code class="language-java"><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AddressResultReceiver</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ResultReceiver</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">AddressResultReceiver</span><span class="hljs-params">(Handler handler)</span> </span>{
+        <span class="hljs-keyword">super</span>(handler);
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onReceiveResult</span><span class="hljs-params">(<span class="hljs-keyword">int</span> resultCode, Bundle resultData)</span>
+    </span>{…}
+}
+</div></code></pre>
+<p><code>ResultReceiver</code> is passed through Intent when IntentService is started:</p>
+<pre><code class="language-java"><div>Intent intent = <span class="hljs-keyword">new</span> Intent(<span class="hljs-keyword">this</span>, FetchAddressIntentService.class);
+intent.putExtra(Constants.RECEIVER, mResultReceiver);
+intent.putExtra(Constants.LOCATION_DATA_EXTRA, mLastLocation);
+startService(intent);
+</div></code></pre>
+<p>Then, in IntentService, result is set using Bundle and sended using <code>send()</code> method:</p>
+<pre><code class="language-java"><div>Bundle bundle = <span class="hljs-keyword">new</span> Bundle();
+bundle.putString(Constants.RESULT_DATA_KEY, message);
+mReceiver.send(resultCode, bundle);
+</div></code></pre>
+<h3 id="595-asynctask-deprecated">5.9.5 AsyncTask <em>(deprecated)</em></h3>
+<p><strong>AsyncTasks</strong> are used for short and more interactive tasks, it is runned on separated worker thread, but keeps link with main UI thread via: <code>onPreExecute</code>, <code>onProgressUpdate</code> and <code>onPostExecute</code> (<code>AsyncTask&lt;?, ?, ?&gt;</code>, paramethers for input, progress and output). Background task is defined in <code>doInBackground()</code> and started with <code>Task().execute</code>.</p>
+<pre><code class="language-java"><div><span class="hljs-keyword">private</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PostTask</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AsyncTask</span>&lt;<span class="hljs-title">String</span>, <span class="hljs-title">Integer</span>, <span class="hljs-title">String</span>&gt; </span>{
+
+    <span class="hljs-comment">// executed just before tasks starts</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onPreExecute</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">super</span>.onPreExecute();
+        ProgressBar bar=(ProgressBar)findViewById(R.id.progressBar);
+        bar.setVisibility(View.VISIBLE);
+        bar.setProgress(<span class="hljs-number">0</span>);
+    }
+
+    <span class="hljs-comment">//executed in background, status is communicated via publishProgress()</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> String <span class="hljs-title">doInBackground</span><span class="hljs-params">(String... params)</span> </span>{
+        String url=params[<span class="hljs-number">0</span>];
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt;= <span class="hljs-number">10</span>; i += <span class="hljs-number">1</span>) {
+            <span class="hljs-keyword">try</span> {
+                Thread.sleep(<span class="hljs-number">1000</span>);
+            } <span class="hljs-keyword">catch</span> (InterruptedException e) {
+                e.printStackTrace();
+            }
+            publishProgress(i);
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-string">"All Done!"</span>;
+    }
+
+    <span class="hljs-comment">// connected to main thread</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onProgressUpdate</span><span class="hljs-params">(Integer... values)</span> </span>{
+        <span class="hljs-keyword">super</span>.onProgressUpdate(values);
+        ProgressBar bar=(ProgressBar)findViewById(R.id.progressBar);
+        bar.setVisibility(View.VISIBLE);
+        bar.setProgress(values[<span class="hljs-number">0</span>]);
+    }
+
+    <span class="hljs-comment">// executed after task is finnished</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onPostExecute</span><span class="hljs-params">(String result)</span> </span>{
+        <span class="hljs-keyword">super</span>.onPostExecute(result);
+        ProgressBar bar=(ProgressBar)findViewById(R.id.progressBar);
+        bar.setVisibility(View.GONE);
+        TextView text = (TextView) findViewById(R.id.status);
+        text.setText(R.string.after);
+    }
+}
+</div></code></pre>
+<h3 id="596-periodicoccasional-task-scheduling">5.9.6 Periodic/Occasional Task Scheduling</h3>
+<p><strong>Contraints:</strong> limited battery capacity (long and frequent background processing is main reason for inefficient energy use). That is why Android limits and controls background processing via <em>wake lock, foreground service, AlarmManager, WorkManager (JobScheduler++), DwonloadManager, SyncAdapter</em>.</p>
+<h4 id="wake-lock">Wake Lock</h4>
+<p>App prevents phone from going to a low-power sleep mode, to use it app has to have special permission:</p>
+<pre><code class="language-xml"><div><span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.WAKE_LOCK"</span> /&gt;</span>
+</div></code></pre>
+<p>Wake Lock is created using:</p>
+<pre><code class="language-java"><div>PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+<span class="hljs-comment">//PARTIAL_WAKE_LOCK doesn't prevent screen for going black, FLAG_KEEP_SCREEN_ON does</span>
+WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, <span class="hljs-string">"MyApp::MyWakelockTag"</span>);
+wakeLock.acquire();
+</div></code></pre>
+<p>And released using:</p>
+<pre><code class="language-java"><div>wakelock.release();
+</div></code></pre>
+<h4 id="alarmmanager">AlarmManager</h4>
+<p>AlarmManager is used for running periodic operations at specified times or with specified time interval, used it for tasks that need to be done with exact times between them, but don't used for: periodic backup to the server (use SyncAdapter), checking for new notifications/messages from serve (use Firebase messaging if possible).</p>
+<p>There are several types of alarms (depending on exactness):</p>
+<ul>
+<li><strong>inexact</strong> - Android will decide how to group alarms coming from multiple apps in order to optimize energy use</li>
+<li><strong>exact</strong> - alarm will be executed at prescribed time, unless device is in sleep mode</li>
+<li><strong>exact while idle</strong> - alarm will be executed at prescribed time (+/- 9 minutes), even if device is in sleep mode</li>
+</ul>
+<p>Alarm types (depending on clock):</p>
+<ul>
+<li><strong>RTC</strong> - real time clock</li>
+<li><strong>ELAPSED_REALTIME</strong> - time since booted</li>
+</ul>
+<p>To use AlarmManager firstly you need to create <code>BroadcastReceiver</code> that manges task you want to perform when alarm is ready. Then you set an alarm with defined type (exact/inexact, one off/repeating, RTC/ELAPSED), starting time, repeating interval (optionally) and supplying Intent that starts BroadcastReceiver.</p>
+<p>After device is rebooted, alarm has to be restored:</p>
+<ol>
+<li>App has to have necessary permission</li>
+</ol>
+<pre><code class="language-xml"><div><span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.RECEIVE_BOOT_COMPLETED"</span>/&gt;</span>
+</div></code></pre>
+<ol start="2">
+<li>App has to create receiver:</li>
+</ol>
+<pre><code class="language-java"><div><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SampleBootReceiver</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BroadcastReceiver</span> </span>{
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onReceive</span><span class="hljs-params">(Context context, Intent intent)</span> </span>{
+        <span class="hljs-keyword">if</span> (intent.getAction().equals(<span class="hljs-string">"android.intent.action.BOOT_COMPLETED"</span>)) {
+        <span class="hljs-comment">// Set the alarm here.</span>
+        }
+    }
+}
+</div></code></pre>
+<ol start="3">
+<li>Receiver has to be registered in manifest</li>
+</ol>
+<pre><code class="language-xml"><div><span class="hljs-tag">&lt;<span class="hljs-name">receiver</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">".SampleBootReceiver"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">intent-filter</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">action</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.intent.action.BOOT_COMPLETED"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">action</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">intent-filter</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">receiver</span>&gt;</span>
+</div></code></pre>
+<h3 id="597-doze-mode">5.9.7 Doze Mode</h3>
+<p><strong>Doze mode</strong> is mode when device is not charging nor actively used. In this state system sleeps most of the time, but it performs periodic maintence periods when it wakes up and performs tasks from backlog. During sleep mode wake locks are ignored, network access is suspended, AlarmManager is deferred to later time, jobs are not scheduled, sync adapters do not run.</p>
+<p>To program with Doze mode in mind use <strong>Firebase cloud messaging (FCM)</strong> for communication apps - high priority messages can wake device up, <strong>WorkManager</strong> for scheduling jobs or request to be exempt from Doze (use only for specific apps).</p>
+<p>To test apps in Doze mode force device/emulator to idle mode:</p>
+<pre><code><code><div>adb shell dumpsys deviceidle force-idle
+</div></code></code></pre>
+<p><img src="file:///c:\Users\jakob\Documents\PSP\lectures\pics\android004.png" alt=""></p>
+<h3 id="598-workmanager">5.9.8 WorkManager</h3>
+<p><strong>WorkManager</strong> guarantees deferrable, constraint-aware execution with respect to system restrictions. Worker is unit of work</p>
+<pre><code class="language-java"><div><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UploadWorker</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Worker</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">UploadWorker</span><span class="hljs-params">(
+        @NonNull Context context,
+        @NonNull WorkerParameters params)</span> </span>{
+        <span class="hljs-keyword">super</span>(context, params);
+    }
+
+    <span class="hljs-comment">// by default runs in background thread</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Result <span class="hljs-title">doWork</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-comment">// Do the work here, e.g. upload the images.</span>
+        uploadImages()
+        <span class="hljs-comment">// Indicate whether the task finished successfully</span>
+        <span class="hljs-keyword">return</span> Result.success()
+    }
+}
+</div></code></pre>
+<p>In <em>WorkRequest</em> we set constraints, types of execution, e.g.:</p>
+<pre><code class="language-java"><div>Constraints constraints = <span class="hljs-keyword">new</span> Constraints.Builder()
+    .setRequiresDeviceIdle(<span class="hljs-keyword">true</span>)
+    .setRequiresCharging(<span class="hljs-keyword">true</span>)
+    .build();
+
+<span class="hljs-comment">// ...then create a OneTimeWorkRequest that uses those constraints</span>
+OneTimeWorkRequest compressionWork = <span class="hljs-keyword">new</span> OneTimeWorkRequest.Builder(CompressWorker.class)
+    .setConstraints(constraints)
+    .build();
+</div></code></pre>
+<p>We run tasks using:</p>
+<pre><code class="language-java"><div>WorkManager.getInstance().enqueue(uploadWorkRequest);
+</div></code></pre>
+<h3 id="599-conclusion---when-to-use-what">5.9.9 Conclusion - when to use what?</h3>
+<table>
+<thead>
+<tr>
+<th>Type of work</th>
+<th>Example</th>
+<th>What to use?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Best effort execution</td>
+<td>need to update UI, which may not be available</td>
+<td><code>HandlerThread</code>, <code>IntentService</code> or <code>AsyncTask</code></td>
+</tr>
+<tr>
+<td>Guaranteed execution at current moment</td>
+<td>paying, we must ensure that payment goes through and user is informed</td>
+<td><code>ForegroundService</code></td>
+</tr>
+<tr>
+<td>Guaranteed eventual execution</td>
+<td>Reminding user to exercise</td>
+<td><code>WorkManager</code></td>
+</tr>
+<tr>
+<td>Guaranteed execution at exact (periodic) times</td>
+<td>Control oven through Android app</td>
+<td>Extremely difficult - make app exempt from battery optimization, use foreground service, use <code>AlarmManager</code> exact alarms (+/- 9 min), use Firebase</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Specialised solutions for particular use cases</strong></p>
+<table>
+<thead>
+<tr>
+<th>Use case</th>
+<th>Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Synchronise data with server</td>
+<td><code>SyncAdapter</code></td>
+</tr>
+<tr>
+<td>Download large content in background</td>
+<td><code>DownloadManager</code></td>
+</tr>
+<tr>
+<td>Reming user to buy milk when at grocery store</td>
+<td><code>Geofencing</code> from GooglePlayServices</td>
+</tr>
+</tbody>
+</table>
+<h2 id="510-mobile-sensing">5.10 Mobile Sensing</h2>
+<table>
+<thead>
+<tr>
+<th>Pros of smartphone sensing</th>
+<th>Cons of smartphone sensing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Personalised - suited for human activities</td>
+<td>General purpose hardware, inappropriate placement leads to inacurate sensing</td>
+</tr>
+<tr>
+<td>Low cost of deployment and maintence</td>
+<td>Multi-tasking OS</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Mobile sensor</th>
+<th>Use case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Accelerometer</td>
+<td>physical activity (running, walking, sitting, etc.)</td>
+</tr>
+<tr>
+<td>Aceelerometer, GPS, WiFi</td>
+<td>transport mode (bicycle, car, train)</td>
+</tr>
+<tr>
+<td>Microphone, camera, Bluetooth</td>
+<td>surrondings, context (party, shopping mall)</td>
+</tr>
+<tr>
+<td>Microphone</td>
+<td>human voice (speaker recognition, stress, etc.)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="5101-sensor-framework">5.10.1 Sensor Framework</h3>
+<p><strong>SensorManager class</strong> - system service for sensing managment, used for accelerometer, magnetometer, barometer, temperature sensor, light, proximity, etc. (before using sensor, check if sensor is present).</p>
+<pre><code class="language-java"><div><span class="hljs-keyword">private</span> SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+List&lt;Sensor&gt; deviceSensors = sensorManager.getSensorList(Sensor.TYPE_ALL);
+</div></code></pre>
+<ul>
+<li><strong>Sensor class</strong> - sensor types are constants, data reporting is either streamed or on changed</li>
+<li><strong>SensorEvent class</strong> - events contains new sensed values, accuracy timestamp and sensor type information</li>
+<li><strong>SensorEventListener interface</strong> - implement&amp;override, then we register listener (at the end, we should unregister)</li>
+</ul>
+<h3 id="5102-google-play-services">5.10.2 Google Play Services</h3>
+<p><strong>Google Play services</strong> is background service providing access to a range of Google's services, like maps, Google sign in, Google drive, location, activity recognition, etc. It is centralised handler of sensing requests that reduces energy usage (e.g. one GPS result can be served to bunch of apps that request location in short period of time).</p>
+<h2 id="511-mobile-sensing-and-machine-learning">5.11 Mobile Sensing and Machine Learning</h2>
+<ol>
+<li><strong>Build mathematical models</strong> explaining higher-level concept based on previously collected training data</li>
+<li><strong>Predict/infer higher-level concepts</strong> from newly-collected data using above models</li>
+</ol>
+<p><strong>Types of machine learning (ML)</strong>:</p>
+<ul>
+<li>supervised learning - training data contains both input valuesand output labels. Model is build to predict labels from future non-labelled data that contains only input</li>
+<li>unsupervised learning - training data contains unlabelled data. Model finds structure in data.</li>
+</ul>
+<p><img src="file:///c:\Users\jakob\Documents\PSP\lectures\pics\android005.png" alt=""></p>
+<h3 id="5111-supervised-learning">5.11.1 Supervised learning</h3>
+<p><strong>Classification</strong> - the output (label) is catorical (e.g. walk, run, sit)
+<strong>Regression</strong> - the output is numerical (e.g. predicting sleep time)</p>
+<h4 id="evaluating-classification">Evaluating classification</h4>
+<table>
+<thead>
+<tr>
+<th>Classification</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>True positive TP</td>
+<td>classifier predicts data point belongs to a class that indeed belogs to</td>
+</tr>
+<tr>
+<td>True negative TN</td>
+<td>classifier predicts data point does not belong to a class that indeed does not belongs to</td>
+</tr>
+<tr>
+<td>False positive FP</td>
+<td>classifier predicts data point belongs to class, but it doesn't</td>
+</tr>
+<tr>
+<td>False negative FN</td>
+<td>classifier predicts data point doesn't belong to a class, but it does</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Evaluating classification</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Accuracy</td>
+<td><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mfrac><mrow><mo>(</mo><mi>T</mi><mi>P</mi><mo>+</mo><mi>T</mi><mi>N</mi><mo>)</mo></mrow><mrow><mo>(</mo><mi>T</mi><mi>P</mi><mo>+</mo><mi>T</mi><mi>N</mi><mo>+</mo><mi>F</mi><mi>P</mi><mo>+</mo><mi>F</mi><mi>N</mi><mo>)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{(TP + TN)}{(TP + TN + FP + FN)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:1.01em;"></span><span class="strut bottom" style="height:1.53em;vertical-align:-0.52em;"></span><span class="base textstyle uncramped"><span class="mord reset-textstyle textstyle uncramped"><span class="sizing reset-size5 size5 reset-textstyle textstyle uncramped nulldelimiter"></span><span class="mfrac"><span class="vlist"><span style="top:0.34500000000000003em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord scriptstyle cramped"><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mbin">+</span><span class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mord mathit" style="margin-right:0.10903em;">N</span><span class="mbin">+</span><span class="mord mathit" style="margin-right:0.13889em;">F</span><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mbin">+</span><span class="mord mathit" style="margin-right:0.13889em;">F</span><span class="mord mathit" style="margin-right:0.10903em;">N</span><span class="mclose">)</span></span></span></span><span style="top:-0.22999999999999998em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle textstyle uncramped frac-line"></span></span><span style="top:-0.485em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord scriptstyle uncramped"><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mbin">+</span><span class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mord mathit" style="margin-right:0.10903em;">N</span><span class="mclose">)</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="sizing reset-size5 size5 reset-textstyle textstyle uncramped nulldelimiter"></span></span></span></span></span></td>
+</tr>
+<tr>
+<td>Precision</td>
+<td><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mfrac><mrow><mi>T</mi><mi>P</mi></mrow><mrow><mo>(</mo><mi>T</mi><mi>P</mi><mo>+</mo><mi>F</mi><mi>P</mi><mo>)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{TP}{(TP + FP)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.872331em;"></span><span class="strut bottom" style="height:1.392331em;vertical-align:-0.52em;"></span><span class="base textstyle uncramped"><span class="mord reset-textstyle textstyle uncramped"><span class="sizing reset-size5 size5 reset-textstyle textstyle uncramped nulldelimiter"></span><span class="mfrac"><span class="vlist"><span style="top:0.34500000000000003em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord scriptstyle cramped"><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mbin">+</span><span class="mord mathit" style="margin-right:0.13889em;">F</span><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mclose">)</span></span></span></span><span style="top:-0.22999999999999998em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle textstyle uncramped frac-line"></span></span><span style="top:-0.394em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord scriptstyle uncramped"><span class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mord mathit" style="margin-right:0.13889em;">P</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="sizing reset-size5 size5 reset-textstyle textstyle uncramped nulldelimiter"></span></span></span></span></span></td>
+</tr>
+<tr>
+<td>Recall</td>
+<td><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mfrac><mrow><mi>T</mi><mi>P</mi></mrow><mrow><mo>(</mo><mi>T</mi><mi>P</mi><mo>+</mo><mi>F</mi><mi>N</mi><mo>)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{TP}{(TP + FN)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.872331em;"></span><span class="strut bottom" style="height:1.392331em;vertical-align:-0.52em;"></span><span class="base textstyle uncramped"><span class="mord reset-textstyle textstyle uncramped"><span class="sizing reset-size5 size5 reset-textstyle textstyle uncramped nulldelimiter"></span><span class="mfrac"><span class="vlist"><span style="top:0.34500000000000003em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord scriptstyle cramped"><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mbin">+</span><span class="mord mathit" style="margin-right:0.13889em;">F</span><span class="mord mathit" style="margin-right:0.10903em;">N</span><span class="mclose">)</span></span></span></span><span style="top:-0.22999999999999998em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle textstyle uncramped frac-line"></span></span><span style="top:-0.394em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord scriptstyle uncramped"><span class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mord mathit" style="margin-right:0.13889em;">P</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="sizing reset-size5 size5 reset-textstyle textstyle uncramped nulldelimiter"></span></span></span></span></span></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Evaluating regression</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mean absolute error (MEA)</td>
+<td></td>
+</tr>
+<tr>
+<td>Mean squared error (MSE)</td>
+<td></td>
+</tr>
+<tr>
+<td><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>R</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">R^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.8141079999999999em;"></span><span class="strut bottom" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="mord"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="vlist"><span style="top:-0.363em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord mathrm">2</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span></span></td>
+<td>how much better model is than simple horizontal line through mean of the sample</td>
+</tr>
+</tbody>
+</table>
+<h3 id="5112-naive-bayesian-classifier">5.11.2 Naive Bayesian Classifier</h3>
+<p>Based on Bayesian Theorem:</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>P</mi><mo>(</mo><mi>Y</mi><mi mathvariant="normal">∣</mi><mi>X</mi><mo>)</mo><mo>=</mo><mfrac><mrow><mi>P</mi><mo>(</mo><mi>X</mi><mi mathvariant="normal">∣</mi><mi>Y</mi><mo>)</mo><mi>P</mi><mo>(</mo><mi>Y</mi><mo>)</mo></mrow><mrow><mi>P</mi><mo>(</mo><mi>X</mi><mo>)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex"> P(Y|X) = \frac{P(X|Y)P(Y)}{P(X)} </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:1.427em;"></span><span class="strut bottom" style="height:2.363em;vertical-align:-0.936em;"></span><span class="base displaystyle textstyle uncramped"><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.22222em;">Y</span><span class="mord mathrm">∣</span><span class="mord mathit" style="margin-right:0.07847em;">X</span><span class="mclose">)</span><span class="mrel">=</span><span class="mord reset-textstyle displaystyle textstyle uncramped"><span class="sizing reset-size5 size5 reset-textstyle textstyle uncramped nulldelimiter"></span><span class="mfrac"><span class="vlist"><span style="top:0.686em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle textstyle cramped"><span class="mord textstyle cramped"><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.07847em;">X</span><span class="mclose">)</span></span></span></span><span style="top:-0.2300000000000001em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle textstyle uncramped frac-line"></span></span><span style="top:-0.677em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle textstyle uncramped"><span class="mord textstyle uncramped"><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.07847em;">X</span><span class="mord mathrm">∣</span><span class="mord mathit" style="margin-right:0.22222em;">Y</span><span class="mclose">)</span><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.22222em;">Y</span><span class="mclose">)</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="sizing reset-size5 size5 reset-textstyle textstyle uncramped nulldelimiter"></span></span></span></span></span></span></p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>P</mi><mo>(</mo><mi>Y</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">P(Y)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.22222em;">Y</span><span class="mclose">)</span></span></span></span> - prior; <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>P</mi><mo>(</mo><mi>X</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">P(X)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.07847em;">X</span><span class="mclose">)</span></span></span></span> - evidence</p>
+<p><eq><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>Y</mi></mrow><annotation encoding="application/x-tex">Y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.22222em;">Y</span></span></span></span></eq> - class we observe; <eq><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span></span></span></span></eq> - features that we observe</p>
+<p><strong>Example</strong> - is person sleeping based on location, phone value, charging status (Y - sleping [yes, no], X1 - location (home, other), X2- volume [silent, ringing], X3 - charging [yes, no]).</p>
+<p><img src="file:///c:\Users\jakob\Documents\PSP\lectures\pics\android006.png" alt=""></p>
+<h2 id="512-android-architeture-components">5.12 Android Architeture Components</h2>
+<p>Intruduced in 2017 with new programming paradigms (from MVC (model-view-contoller) to MVVM (model-view-viewmodel)) and new classes/methods/libraries.</p>
+<h3 id="5121-model-view-controller-mvc">5.12.1 Model-View-Controller (MVC)</h3>
+<p><img src="file:///c:\Users\jakob\Documents\PSP\lectures\pics\android007.png" alt=""></p>
+<p><strong>Drawbacks</strong>:</p>
+<ul>
+<li>controller and view are tigtly connected, if you change view, you have to change controller</li>
+<li>controller depends on user iteractions (activity)</li>
+</ul>
+<h3 id="5122-model-view-viewmodel-mvvm">5.12.2 Model-View-ViewModel (MVVM)</h3>
+<p><img src="file:///c:\Users\jakob\Documents\PSP\lectures\pics\android008.png" alt=""></p>
+<p><strong>Key points</strong>:</p>
+<ul>
+<li>ViewModel is responsible for wrapping model and preparing observable data</li>
+<li>view binds to observable data invokes actions exposed by the ViewModel</li>
+</ul>
+<h4 id="viewmodel-class">ViewModel Class</h4>
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Handling data in Activity/Fragment - component may be destroyed, memory leaks, same data may be needed at different views</td>
+<td>New class that survives activity/fragment lifecycle changes, provides data but it is not aware of views using data</td>
+</tr>
+</tbody>
+</table>
+<p>ViewModel is scoped to <code>ViewModelProvider</code>'slifecycle - survives activitiy <code>onDestroy()</code> calls, but not application's killed events. Data is in-memory, so not preserved on the long run.</p>
+<p>We implement ViewModel using <code>AndroidViewModel</code> class.</p>
+<p><img src="file:///c:\Users\jakob\Documents\PSP\lectures\pics\android009.png" alt=""></p>
+<table>
+<thead>
+<tr>
+<th>Pros of ViewModel</th>
+<th>Cons of ViewModel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data survives screen orientatin changes</td>
+<td>Views must query ViewModel to detect any changes in the data</td>
+</tr>
+<tr>
+<td>Multiple views can use same ViewModel</td>
+<td></td>
+</tr>
+<tr>
+<td>No data leakage</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="livedata-class">LiveData Class</h4>
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data is frequently updated, view must check for updates in an infinity loop</td>
+<td>New class that holds data, allows data to be observed and notifies if data is changed</td>
+</tr>
+<tr>
+<td>Views might want to update data in ViewModel</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Pros of LiveData class</th>
+<th>Cons of LiveData class</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data is updated frequently, observers to notify changes</td>
+<td>Code still needs to be written to set and get view properties when data changes</td>
+</tr>
+</tbody>
+</table>
+<h4 id="data-binding">Data Binding</h4>
+<p><strong>Data binding library</strong> allows data from ViewModel to be directly mapped to specific views in XML layout. Often is used in conjuction with <code>LiveData</code> from ViewModel.</p>
+<p><strong>Using data binding</strong>:</p>
+<ol>
+<li>Modify <code>Gradle</code> file</li>
+</ol>
+<pre><code class="language-gradle"><div>android {
+    dataBinding {enabled = <span class="hljs-keyword">true</span>}
+}
+</div></code></pre>
+<ol start="2">
+<li>Modify XML to have <code>&lt;layout&gt;</code> as root view</li>
+<li>Add <code>&lt;data&gt;</code> variables in layot</li>
+</ol>
+<pre><code class="language-xml"><div><span class="hljs-tag">&lt;<span class="hljs-name">layout</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">data</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">variable</span>
+            <span class="hljs-attr">name</span>=<span class="hljs-string">"myViewModel"</span>
+            <span class="hljs-attr">type</span>=<span class="hljs-string">"si.uni_lj.fri.lrk.myapp.MainViewModel"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">data</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ConstraintLayout</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">ConstraintLayout</span>&gt;</span>
+    ...
+<span class="hljs-tag">&lt;/<span class="hljs-name">layout</span>&gt;</span>
+</div></code></pre>
+<ol start="4">
+<li>Binding classes are automatically generated</li>
+<li>Instantiate binding class</li>
+</ol>
+<pre><code class="language-java"><div>MainFragmentBinding binding;
+binding = DataBindingUtil.inflate(inflater, R.layout.main_fragment, container, <span class="hljs-keyword">false</span>);
+</div></code></pre>
+<ol start="6">
+<li>Configure data binding variables</li>
+</ol>
+<pre><code class="language-java"><div>binding.setVariable(viewModel, myViewModel)
+</div></code></pre>
+<ol start="7">
+<li>Binding expressions - define how views interact with bound objects
+<ul>
+<li><em>one way</em> - view is updated with data from binding, but changes in view are not propagated to data</li>
+<li><em>two way</em> - data is updated in response to changes in the view</li>
+<li><em>event and listener binding</em></li>
+</ul>
+</li>
+</ol>
+<h2 id="513-managing-data-flow--object-relational-mapping">5.13 Managing Data Flow &amp; Object-relational Mapping</h2>
+<p>Data can come from multiple sources (database, shared preferences, remote API, etc.). To handle data storing we use <code>Repository</code>.</p>
+<p><img src="file:///c:\Users\jakob\Documents\PSP\lectures\pics\android010.png" alt=""></p>
+<p><strong>Problem</strong> - object-oriented languages work with objects that can be complex, but relational databases store and manipulate simple scalar values in tables. Converting objects to table entries is cumbersome and prone to errors. <strong>Solution</strong> is using <em>Object-Relationa Mapping (ORM)</em>.</p>
+<h3 id="5131-room-databse">5.13.1 Room Databse</h3>
+<ul>
+<li><strong>Data storage</strong> - underlying Android SQLite database</li>
+<li><strong>Object files (Entities)</strong> - annotated Java models</li>
+<li><strong>Data Access Object (DAO)</strong> - interface between databse and Java objects</li>
+</ul>
+<p><strong>Data flow</strong>:</p>
+<ul>
+<li>repository gets room db instance, obtain references to DAO instances</li>
+<li>repository creates entity instances, passes them to the DAO</li>
+<li>repository calls methods on the DAO passing through entities to be inserted in the DB and receives entity instances back in response to search query</li>
+<li>when DAO has results it packages them into entity objects</li>
+<li>DAO interacts with room DB to initiate database operations and handle results</li>
+<li>room DB handles all low-level interactions with underlying SQLite DB, submitting queries and receiving results</li>
+</ul>
+<h3 id="5132-entities">5.13.2 Entities</h3>
+<p>Each DB table needs an associated Entity class that defines schema for the table. Entity class is a standard Java class with Room annotations:</p>
+<pre><code class="language-java"><div><span class="hljs-meta">@Entity</span>(tableName=<span class="hljs-string">"customers"</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Customer</span> </span>{
+    <span class="hljs-meta">@PrimaryKey</span>(autoGenerate=<span class="hljs-string">"true"</span>)
+    <span class="hljs-meta">@NonNull</span>
+    <span class="hljs-meta">@ColumnInfo</span>(name=<span class="hljs-string">"customerId"</span>)
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> id;
+
+    <span class="hljs-meta">@ColumnInfo</span>(name=<span class="hljs-string">"customerName"</span>)
+    <span class="hljs-keyword">private</span> String name;
+}
+</div></code></pre>
+<h3 id="5133-data-access-object-dao">5.13.3 Data Access Object (DAO)</h3>
+<p>DAO provides a way to access data stored within database. It is standard Java interface with additional annotations:</p>
+<pre><code class="language-java"><div><span class="hljs-meta">@Dao</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">CustomerDao</span> </span>{
+
+    <span class="hljs-meta">@Query</span>(<span class="hljs-string">"SELECT * FROM customers"</span>) <span class="hljs-comment">//query that will be executed</span>
+    LiveData&lt;List&lt;Customer&gt;&gt; getAllCustomers();  <span class="hljs-comment">//LiveData enables Repository to observe changes in the data</span>
+    …
+}
+</div></code></pre>
+<h3 id="5134-database-instance">5.13.4 Database Instance</h3>
+<p>Database instance is a helper class for accessing SQLite DB, it extends RoomDatabse and has additional annotations</p>
+<pre><code class="language-java"><div><span class="hljs-meta">@Database</span>(entities = {Customer.class}, version = <span class="hljs-number">1</span>)
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CustomerRoomDatabase</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">RoomDatabase</span> </span>{
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> CustomerDao <span class="hljs-title">customerDao</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> CustomerRoomDatabase INSTANCE;
+
+    <span class="hljs-function"><span class="hljs-keyword">static</span> CustomerRoomDatabase <span class="hljs-title">getDatabase</span><span class="hljs-params">(<span class="hljs-keyword">final</span> Context context)</span> </span>{
+        <span class="hljs-keyword">if</span> (INSTANCE == <span class="hljs-keyword">null</span>) {
+            <span class="hljs-keyword">synchronized</span> (CustomerRoomDatabase.class) {
+                <span class="hljs-keyword">if</span> (INSTANCE == <span class="hljs-keyword">null</span>) {
+                    INSTANCE = Room.databaseBuilder(
+                            context.getApplicationContext(),
+                            CustomerRoomDatabase.class, <span class="hljs-string">"customer_database"</span>)
+                        .build();
+                }
+            }
+        }
+        <span class="hljs-keyword">return</span> INSTANCE;
+    }
+}
+</div></code></pre>
+<h3 id="5135-practical-considerations">5.13.5 Practical Considerations</h3>
+<ol>
+<li>Running on the main thread is considered a bad practice and is disabled by default (enable with <code>allowMainThreadQueries()</code>), use Executors instead.</li>
+<li>Repository should handle Database instantiation:</li>
+</ol>
+<pre><code class="language-java"><div><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CustomerRepository</span> </span>{
+    <span class="hljs-keyword">private</span> CustomerDao customerDao;
+    <span class="hljs-keyword">private</span> CustomerRoomDatabase db;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">CustomerRepository</span><span class="hljs-params">(Application application)</span> </span>{
+        db = CustomerRoomDatabase.getDatabase(application);
+        customerDao = db.customerDao();
+    }
+    …
+}
+</div></code></pre>
+<h2 id="514-network-communication">5.14 Network Communication</h2>
+<h3 id="5141-wireless-data-transmission">5.14.1 Wireless Data Transmission</h3>
+<p>Information is encoded as the variability of the electromagnetic fields. Waves are propagated from sender (Tx) to receiver (Rx). Basic paramethers of wireless data transmission are: <em>frequency, wavelength, bandwith</em>.</p>
+<table>
+<thead>
+<tr>
+<th>Smartphone Wireless Interfaces</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Near Field Communication (NFC)</td>
+<td>Very low power and short range (10cm), speed (400kbps), payment systems, etc.</td>
+</tr>
+<tr>
+<td>Bluetooth/Bluetooth Low Energy (BLE)</td>
+<td>Low power and short range (10m), speed (1Mbps)</td>
+</tr>
+<tr>
+<td>WiFi</td>
+<td>Medium power consumption, relatively short range (100m), high speed</td>
+</tr>
+<tr>
+<td>Cellular network</td>
+<td>Medium-high power consumption, long range, speed (40kbps 2G - 1Gbps 5G)</td>
+</tr>
+</tbody>
+</table>
+<p>Wireless interface selection impacts:</p>
+<ul>
+<li>capabilities of your app</li>
+<li>cost for user</li>
+<li>power consumption</li>
+</ul>
+<h3 id="5142-web-abstraction">5.14.2 Web abstraction</h3>
+<p><strong>Http(s) URL Connection</strong> - sends HTTP requests and optain responses using connection pooling. Responses are cached and secure communication is supported via Transport Layer Security (TLS).</p>
+<p><strong>OkHttp</strong> is advance HTTP client 3rd party library. It includes all functionalities of HttpsURLConnection, but also automatic network connection recovery, retries and data compresion.</p>
+<p><strong>Retrofit</strong> is REST client for Android (third-party library) that defines model, possible REST operations, converter, adapter, authentication mechanism and it builds client. Under the hood it uses OkHttp.</p>
+<p><strong>Volley</strong> is third-party REST client, compared to Retrofit it doesn't threat REST API calls as simple java methods so is more complex to write and has less response parsing options. But, compared to Retrofit, it does include support for image loading.</p>
+<h3 id="5143-best-practices-in-android-networking">5.14.3 Best Practices in Android Networking</h3>
+<table>
+<thead>
+<tr>
+<th>Practise</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Run operatiopns on separate thread</td>
+<td></td>
+</tr>
+<tr>
+<td>Reduce amount pf data transferred</td>
+<td>low resolution if possible, compress data, quering and caching</td>
+</tr>
+<tr>
+<td>Push, don't pull</td>
+<td>get notify when new data is available</td>
+</tr>
+<tr>
+<td>Reuse network connections</td>
+<td>but don't leave them hanging forever</td>
+</tr>
+<tr>
+<td>Secure data &amp; connection</td>
+<td>SSL</td>
+</tr>
+<tr>
+<td>Adapt to physical connection</td>
+<td>reduce data when on slow or metered network, prefetch data</td>
+</tr>
+</tbody>
+</table>
+<h3 id="5144-backend-for-mobile-apps">5.14.4 Backend for Mobile Apps</h3>
+<p><strong>Firebase</strong> is mobile and web development platform supported by Google that allows authentication with Google ID, notifications (chat-like apps), crashlytics, ML learning support, etc.</p>
+<p><strong>Parse Server</strong> is open source backend as service (BaaS), Back4App is its hosting platform. It is great for building REST APIs, scheduling server jobs, user managment (auto emails, social login).</p>
+<p><strong>Back4App</strong> includes NoSQL database, REST API to access data via HTTP using different languages/platforms.</p>
+<h2 id="515-hybrid-application-development">5.15 Hybrid Application Development</h2>
+<p>Idea of <strong>cross-platform software</strong> is to write programme once and run it everywhere. Those are lightweight technologies that can run on different platforms (e.g. web apps written in HTML, JavaScript, CSS).</p>
+<p>Drawbacks of cross-platform software are:</p>
+<ul>
+<li>features not supported by high-level methods cannot be used</li>
+<li>only lowest common denominator subset of features which are available on all platforms</li>
+<li>translating cross-platform programmes to individual native languages can lead to inefficiencies</li>
+<li>different platforms often have different user interface convections</li>
+</ul>
+<p>Idea of <strong>hybrid development</strong> is to be able to access lower level features of individual platforms:</p>
+<ul>
+<li>lightweight technologies that can run on different platforms (e.g. HTML, JavaScript, CSS)</li>
+<li>libraries implementing access to internal functionalities of individual platforms</li>
+<li>pack into applications for individual platforms</li>
+</ul>
+<h3 id="5151-apache-cordova">5.15.1 Apache Cordova</h3>
+<p>Mobile hybrid app development framework in which apps are written using CSS, HTML and JavaScript. Some native functionalities are enabled through HTML5, but most of them are implemented using external plugins.</p>
+<p><img src="file:///c:\Users\jakob\Documents\PSP\lectures\pics\android011.png" alt=""></p>
+<p>In Cordova you can capture and react to lifecycle events if needed, but you don't have to. Common events exposed by the application are:</p>
+<ul>
+<li>Device ready (app fully loaded)</li>
+<li>Application Pause</li>
+<li>Application Resume</li>
+<li>back button press</li>
+<li>menu button press</li>
+<li>start call button press</li>
+<li>etc.</li>
+</ul>
+<pre><code class="language-javascript"><div><span class="hljs-built_in">document</span>.addEventListener(<span class="hljs-string">"pause"</span>, callbackFion, <span class="hljs-literal">false</span>);
+</div></code></pre>
+<p><strong>Minimising drawbacks</strong>:</p>
+<ul>
+<li>performance (compared to native apps): use minified versions of JS and CSS</li>
+<li>non-native look and feel: use CSS-based frameworks to create apps with native-like look and feel (e.g. Ionic, NativeScript)</li>
+</ul>
+
+    </body>
+    </html>
